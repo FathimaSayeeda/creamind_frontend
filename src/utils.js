@@ -1,3 +1,12 @@
 export function getBaseUrl() {
-    return "https://thecreamind.com/api"
+  return "https://api.thecreamind.com";
+}
+
+export function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    const context = this;
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(context, args), wait);
+  };
 }
