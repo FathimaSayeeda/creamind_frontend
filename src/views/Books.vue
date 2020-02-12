@@ -2,12 +2,9 @@
   <div>
     <section class="hero">
       <div class="container">
-        <h1 class="title">
-          Books!
-        </h1>
-        <h2 class="subtitle">
-          All the books you will ever need is here!
-        </h2>
+        <div class="title">
+          Books your kids will hold close to heart!! </div>
+       
       </div>
     </section>
     <section class="container filters level">
@@ -114,5 +111,10 @@ export default {
 <style lang="scss" scoped>
 .filters {
   margin-top: 3em;
+  color:crimson;
+}
+
+.title{
+  font-size: 50px !important;
 }
 </style>
