@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .v-label {
   color: black;
 }
@@ -105,6 +105,10 @@
 .books-section-title {
   font-family: 'Nexa-Bold';
   font-size: 30px;
+  @media (max-width: 600px) {
+    font-size: 20px;
+    margin: 20px auto;
+  }
 }
 </style>
 

@@ -8,7 +8,13 @@
           <img :src="require('~/assets/creamind.svg')" /> kid can do.
         </div>
         <!-- <div class="text-h5">Explore our wide range of Genres</div> -->
-        <v-btn rounded large class="mt-5 pa-5" width="200px" color="#60a6ad"
+        <v-btn
+          outlined
+          tile
+          large
+          class="main-button mt-5 pa-5"
+          width="200px"
+          color="#099094"
           >Explore.</v-btn
         ></v-col
       ><v-spacer class="hidden-sm-and-down"></v-spacer>
@@ -49,5 +55,15 @@ export default {
 }
 .landing-image {
   transform: rotateY(180deg);
+}
+::v-deep.main-button {
+  font-size: 16px !important;
+  font-family: 'Nexa-Bold';
+  border: 3px solid #099094;
+}
+::v-deep.main-button:hover {
+  background-color: black;
+  border: 3px solid black;
+  font-family: 'Nexa-Black';
 }
 </style>

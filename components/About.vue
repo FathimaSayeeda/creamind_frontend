@@ -20,7 +20,7 @@
             no more a problem. Come choose a book you think your kid will love.
             <strong style="color: crimson">Rent, Read, Return!</strong>
             Enjoy the reading and go for the next. Instill the Love of Books in
-            your kid which surely adds up to the person they'll become.
+            your kid which surely adds to the person they'll become.
           </div>
         </div>
       </div>

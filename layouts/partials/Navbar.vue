@@ -64,9 +64,9 @@
             >CONTACT</v-btn
           ></nuxt-link
         >
-        <nuxt-link :to="{ path: 'books' }" class="nuxt-link"
+        <nuxt-link :to="{ path: '/books' }" class="nuxt-link"
           ><v-btn class="ms-md-8 nav-button text-capitalize rtl" text
-            >BOOKS<v-img
+            >EXPLORE<v-img
               width="16px"
               :src="require('~/assets/right-arrow.svg')"
               class="pa-3 mt-n1 ms-2"

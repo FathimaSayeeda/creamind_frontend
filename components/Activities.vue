@@ -180,7 +180,7 @@ export default Vue.extend({
 }
 
 .activity-card:hover {
-  box-shadow: 5px 10px 18px #888888;
+  border: 3px solid #099094;
 }
 .activity-name,
 .activity-sub {
