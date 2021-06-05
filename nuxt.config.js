@@ -72,4 +72,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  // 0.0.0.0 so that LAN devices could access the sites
+  server: {
+    host: "0.0.0.0"
+  }
 }
