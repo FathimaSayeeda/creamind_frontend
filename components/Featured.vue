@@ -36,6 +36,7 @@ import Vue from 'vue'
 export default Vue.extend({
   data() {
     return {
+      show: false,
       books: [
         {
           name: "Charlotte's Web",
