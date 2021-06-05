@@ -1,4 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
+import { getRoutes } from "./routes";
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -14,6 +15,11 @@ export default {
       { hid: 'description', name: 'description', content: '' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+  },
+
+  // Static site generation
+  generate: {
+    routes: getRoutes
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
