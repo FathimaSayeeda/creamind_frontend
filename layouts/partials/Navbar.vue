@@ -2,14 +2,24 @@
   <div class="navbar">
     <v-navigation-drawer v-model="drawer" temporary fixed color="#f5eaeb" right>
       <v-list dense>
-        <v-list-item v-for="item in items" :key="item.title" :to="item.link">
+        <v-list-item
+          class="bg"
+          v-for="item in items"
+          :key="item.title"
+          :to="item.link"
+        >
           <v-list-item-content>
-            <v-list-item-title class="nav-item">{{
+            <v-list-item-title class="nav-drawer-item">{{
               item.title
             }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
+      <v-img
+        width="200px"
+        class="drawer-img"
+        :src="require('~/assets/book-flying.svg')"
+      ></v-img>
     </v-navigation-drawer>
     <v-app-bar
       color="#f5eaeb"
@@ -35,14 +45,7 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items
-        class="
-          left
-          mx-2
-          me-md-8
-          nav-item
-          custom-transform-class
-          hidden-sm-and-down
-        "
+        class="left mx-2 me-md-8 custom-transform-class hidden-sm-and-down"
       >
         <nuxt-link :to="{ path: '/', hash: '/' }" class="nuxt-link"
           ><v-btn class="ms-md-8 nav-button text-capitalize rtl" text
@@ -132,9 +135,8 @@ export default Vue.extend({
 } */
 
 .nav-button {
-  font-family: 'Nexa-Regular';
+  font-family: 'Nexa-Bold';
   color: #099094;
-  font-weight: bold;
 }
 ::v-deep .v-btn {
   color: #099094 !important;
@@ -149,5 +151,18 @@ export default Vue.extend({
   color: #099094;
   text-transform: uppercase;
   font-size: 14px;
+}
+.nav-drawer-item {
+  font-family: 'Nexa-Black';
+  color: black;
+}
+.bg:hover {
+  background-color: #099094;
+  cursor: pointer;
+}
+.drawer-img {
+  position: absolute;
+  bottom: 50px;
+  left: 25px;
 }
 </style>
