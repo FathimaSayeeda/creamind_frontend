@@ -7,8 +7,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: 'TheCreaMind - %s',
-    title: 'There is No Telling What a CreaMind kid can do',
+    titleTemplate: '%s - thecreamind-frontend',
+    title: 'The Crea Mind - there is no telling what a Crea Mind kid can do.',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

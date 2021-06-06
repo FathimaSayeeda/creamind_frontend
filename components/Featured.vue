@@ -5,36 +5,7 @@
       <v-row no-gutters class="justify-center mx-sm-2 mx-md-16 my-10"
         ><v-spacer></v-spacer
         ><v-col v-for="book in books" :key="book.name" cols="6" sm="3">
-          <v-card
-            light
-            max-width="300"
-            class="featured-card mb-2 mb-sm-5 mb-md-auto mx-3 mx-md-5"
-          >
-            <v-img :src="book.img" class="book-image" height="200px"></v-img>
-
-            <marquee width="80%" height="10%" class="ml-5"
-              ><v-card-title class="card-title">
-                {{ book.name }}
-              </v-card-title></marquee
-            >
-
-            <v-card-subtitle class="mt-n5 mb-n3 pt-0 pb-2">
-              {{ book.genre }}
-            </v-card-subtitle>
-
-            <v-card-actions class="hidden-sm-and-down">
-              <v-btn
-                class="text-right ml-10"
-                color="orange lighten-2"
-                icon
-                @click="show = !show"
-              >
-                Explore<v-icon>{{
-                  show ? 'mdi-chevron-left' : 'mdi-chevron-right'
-                }}</v-icon>
-              </v-btn>
-            </v-card-actions>
-          </v-card></v-col
+          <BookTile :book="book"></BookTile> </v-col
         ><v-spacer></v-spacer
       ></v-row>
     </div>
@@ -50,22 +21,22 @@ export default Vue.extend({
       books: [
         {
           name: "Charlotte's Web",
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook1.jpg'),
         },
         {
           name: 'Pigeon',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook2.jpg'),
         },
         {
           name: 'Roald Dahl Matilda',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook3.jpg'),
         },
         {
           name: 'The cat in the hat',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook4.png'),
         },
       ],

@@ -91,7 +91,17 @@
           color="#D22D43"
         ></v-autocomplete> </v-col
     ></v-row>
-    <Booklist></Booklist>
+    <v-responsive max-width="1300px" class="margined white--text mx-auto">
+      <div class="featured">
+        <v-row no-gutters class="justify-center mx-16"
+          ><v-spacer></v-spacer>
+          <v-col v-for="book in books" :key="book.name" cols="6" sm="6" md="3">
+            <BookTile :book="book"></BookTile>
+          </v-col>
+          <v-spacer></v-spacer
+        ></v-row>
+      </div>
+    </v-responsive>
   </div>
 </template>
 
@@ -123,37 +133,37 @@ export default Vue.extend({
       books: [
         {
           name: "Charlotte's Web",
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook1.jpg'),
         },
         {
           name: 'Roald Dahl Matilda',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook3.jpg'),
         },
         {
           name: 'Roald Dahl Matilda',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook3.jpg'),
         },
         {
           name: 'The cat in the hat',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook4.png'),
         },
         {
           name: 'The cat in the hat',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook4.png'),
         },
         {
           name: 'Roald Dahl Matilda',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook3.jpg'),
         },
         {
           name: 'Roald Dahl Matilda',
-          genre: 'Fiction',
+          sub_title: 'Fiction',
           img: require('~/assets/templatebook3.jpg'),
         },
       ],
