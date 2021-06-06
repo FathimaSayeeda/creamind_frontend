@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors'
-import { getRoutes } from "./routes";
+import { getRoutes } from './routes'
 
 export default {
   // Target: https://go.nuxtjs.dev/config-target
@@ -8,7 +8,7 @@ export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - thecreamind-frontend',
-    title: 'thecreamind-frontend',
+    title: 'The Crea Mind - there is no telling what a Crea Mind kid can do.',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -19,14 +19,14 @@ export default {
 
   // Static site generation
   generate: {
-    routes: getRoutes
+    routes: getRoutes,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/style/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vue-swiper.ts', '~/plugins/frappeclient.ts'],
+  plugins: ['~/plugins/vue-swiper.ts'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -78,6 +78,6 @@ export default {
 
   // 0.0.0.0 so that LAN devices could access the sites
   server: {
-    host: "0.0.0.0"
-  }
+    host: '0.0.0.0',
+  },
 }
