@@ -50,18 +50,26 @@ export default {
   font-family: 'Nexa-Bold';
   color: black;
   margin-top: 100px;
-  @media (max-width: 600px) {
+  @media (max-width: 400px) {
+    font-size: 18px;
+    width: 200px;
+    line-height: 2;
+    margin-top: 40px;
+  }
+  @media (min-width: 401px) and (max-width: 600px) {
     font-size: 23px;
     width: 200px;
     line-height: 2;
   }
   @media (min-width: 601px) and (max-width: 750px) {
-    font-size: 30px;
+    font-size: 25px;
     width: 230px;
     line-height: 2;
   }
   @media (min-width: 751px) and (max-width: 960px) {
     line-height: 2;
+    width: 300px;
+    font-size: 30px;
   }
 }
 .carousel {
@@ -70,19 +78,19 @@ export default {
 .landing-image {
   transform: rotateY(180deg);
   @media (max-width: 600px) {
-    width: 90%;
+    width: 300px;
     position: absolute;
     right: 10px;
     bottom: 40px;
   }
   @media (min-width: 601px) and (max-width: 750px) {
-    width: 90%;
+    width: 350px;
     position: absolute;
     right: 10px;
     bottom: 40px;
   }
   @media (min-width: 751px) and (max-width: 960px) {
-    width: 80%;
+    width: 450px;
     position: absolute;
     right: 10px;
     bottom: 40px;
