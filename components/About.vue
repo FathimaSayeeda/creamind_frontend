@@ -2,8 +2,10 @@
   <div id="about">
     <v-responsive max-width="1300px" class="margined mx-auto">
       <div class="about pb-14">
-        <h1 class="about-title px-16 pt-10">About The CreaMind!</h1>
-        <div class="pt-md-5 px-16">
+        <h1 class="about-title px-6 px-sm-10 px-md-16 pt-10">
+          About The CreaMind!
+        </h1>
+        <div class="pt-md-5 px-6 px-sm-10 px-md-16">
           <div>
             Hello from The Crea Mind-where children discover the magic of books!
           </div>
@@ -28,10 +30,16 @@
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .about-title {
   font-size: 30px;
   font-family: 'Nexa-Bold';
+  @media (max-width: 600px) {
+    font-size: 25px;
+  }
+  @media (min-width: 601px) and (max-width: 960px) {
+    font-size: 27px;
+  }
 }
 .about {
   color: black;

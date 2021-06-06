@@ -1,18 +1,28 @@
 <template>
-  <v-responsive max-width="1300px" class="margined white--text mx-auto">
+  <v-responsive max-width="1300px" class="margined white--text mx-sm-auto">
     <div class="featured">
-      <h1 class="featured-title px-16 pt-10">Featured Books</h1>
-      <v-row no-gutters class="justify-center mx-16 my-10"
+      <h1 class="featured-title px-6 px-sm-16 pt-10">Featured Books</h1>
+      <v-row no-gutters class="justify-center mx-sm-2 mx-md-16 my-10"
         ><v-spacer></v-spacer
-        ><v-col v-for="book in books" :key="book.name" cols="12" sm="6" md="3">
-          <v-card light max-width="300" class="featured-card mx-5">
+        ><v-col v-for="book in books" :key="book.name" cols="6" sm="3">
+          <v-card
+            light
+            max-width="300"
+            class="featured-card mb-2 mb-sm-5 mb-md-auto mx-3 mx-md-5"
+          >
             <v-img :src="book.img" class="book-image" height="200px"></v-img>
 
-            <v-card-title class="card-title"> {{ book.name }} </v-card-title>
+            <marquee width="80%" height="10%" class="ml-5"
+              ><v-card-title class="card-title">
+                {{ book.name }}
+              </v-card-title></marquee
+            >
 
-            <v-card-subtitle> {{ book.genre }} </v-card-subtitle>
+            <v-card-subtitle class="mt-n5 mb-n3 pt-0 pb-2">
+              {{ book.genre }}
+            </v-card-subtitle>
 
-            <v-card-actions>
+            <v-card-actions class="hidden-sm-and-down">
               <v-btn
                 class="text-right ml-10"
                 color="orange lighten-2"
@@ -71,7 +81,18 @@ export default Vue.extend({
   font-size: 30px;
   font-family: 'Nexa-Bold';
   color: black;
+  @media (max-width: 600px) {
+    font-size: 25px;
+  }
+  @media (min-width: 601px) and (max-width: 960px) {
+    font-size: 27px;
+  }
 }
+// .featured-card {
+//   @media (max-width: 600px) {
+//   }
+// }
+
 .featured-card:hover {
   transform: scale(1.1);
   transition: 1s;

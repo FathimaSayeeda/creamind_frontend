@@ -6,7 +6,6 @@
           Our Activities
         </div></v-responsive
       >
-
       <swiper
         ref="mySwiper"
         max-width="10000px"
