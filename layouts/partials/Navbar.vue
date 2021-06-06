@@ -2,18 +2,20 @@
   <div class="navbar">
     <v-navigation-drawer v-model="drawer" temporary fixed color="#f5eaeb" right>
       <v-list dense>
-        <v-list-item
-          class="bg"
+        <nuxt-link
+          class="nav-drawer-link"
           v-for="item in items"
           :key="item.title"
-          :to="item.link"
+          :to="{ path: item.path, hash: item.hash }"
         >
-          <v-list-item-content>
-            <v-list-item-title class="nav-drawer-item">{{
-              item.title
-            }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
+          <v-list-item class="bg">
+            <v-list-item-content>
+              <v-list-item-title class="nav-drawer-item">{{
+                item.title
+              }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item></nuxt-link
+        >
       </v-list>
       <v-img
         width="200px"
@@ -101,11 +103,11 @@ export default Vue.extend({
     return {
       drawer: false,
       items: [
-        { title: 'HOME', hash: '/' },
-        { title: 'ABOUT', hash: '#about' },
-        { title: 'ACTIVITIES', hash: '#activities' },
-        { title: 'CONTACT', hash: '#contact' },
-        { title: 'BOOKS', hash: 'books' },
+        { title: 'HOME', path: '/', hash: '/' },
+        { title: 'ABOUT', path: '/', hash: '#about' },
+        { title: 'ACTIVITIES', path: '/', hash: '#activities' },
+        { title: 'CONTACT', path: '/', hash: '#contact' },
+        { title: 'BOOKS', path: '/books' },
       ],
     }
   },
@@ -150,6 +152,11 @@ export default Vue.extend({
   font-family: 'Nexa-Regular';
   color: #099094;
   text-transform: uppercase;
+  font-size: 14px;
+}
+.nav-drawer-link {
+  text-decoration: none;
+
   font-size: 14px;
 }
 .nav-drawer-item {
