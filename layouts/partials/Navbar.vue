@@ -164,7 +164,7 @@ export default Vue.extend({
   color: black;
 }
 .bg:hover {
-  background-color: #099094;
+  background-color: #76c1c4;
   cursor: pointer;
 }
 .drawer-img {
