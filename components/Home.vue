@@ -38,7 +38,10 @@ export default {
 
 <style scoped lang="scss">
 .home {
-  height: 81vh;
+  height: calc(100vh - 110px);
+  @media (max-width: 960px) {
+    height: calc(100vh - 80px);
+  }
 }
 .tagline {
   font-size: 40px;
