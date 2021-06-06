@@ -6,10 +6,10 @@
           About The CreaMind!
         </h1>
         <div class="pt-md-5 px-6 px-sm-10 px-md-16">
-          <div>
+          <div class="about-text">
             Hello from The Crea Mind-where children discover the magic of books!
           </div>
-          <div>
+          <div class="about-text">
             The CreaMind was born from an innovative "Why Not". Why not let the
             plethora of books at hand have a wider reach?" Dr.Fasila Siddique,
             founder of The Crea Mind, fondly conceived this colorful idea to
@@ -47,5 +47,10 @@
   letter-spacing: 1px;
   line-height: 2;
   text-align: justify;
+}
+.about-text {
+  @media (max-width: 600px) {
+    font-size: 14px;
+  }
 }
 </style>

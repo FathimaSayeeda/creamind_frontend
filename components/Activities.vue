@@ -179,7 +179,7 @@ export default Vue.extend({
 }
 
 .activity-card:hover {
-  border: 3px solid #099094;
+  background-color: #f0d8d9;
 }
 .activity-name,
 .activity-sub {
@@ -187,6 +187,10 @@ export default Vue.extend({
 }
 .activity-name {
   font-size: 20px;
+  line-height: 1;
+  @media (max-width: 600px) {
+    font-size: 13px;
+  }
 }
 .clip-circle {
   width: 90px;
