@@ -1,8 +1,8 @@
 <template>
-  <div class="home">
+  <div class="home" style="position: relative">
     <v-row no-gutters
       ><v-spacer class="hidden-sm-and-down"></v-spacer
-      ><v-col class="ml-15" cols="6" md="3"
+      ><v-col class="ml-5 ml-sm-15 mt-xl-16 pt-xl-16" cols="6" md="3"
         ><div class="tagline">
           There is no telling what a
           <img :src="require('~/assets/creamind.svg')" /> kid can do.
@@ -21,7 +21,7 @@
       <v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-col cols="6"
         ><img
-          class="landing-image my-15 mx-10"
+          class="landing-image my-md-15 mx-md-10"
           width="80%"
           :src="require('~/assets/landing.svg')" /></v-col
     ></v-row>
@@ -44,20 +44,49 @@ export default {
   }
 }
 .tagline {
+  width: 350px;
   font-size: 40px;
   font-weight: 400px;
   font-family: 'Nexa-Bold';
   color: black;
   margin-top: 100px;
-  // @media (max-width: 600px) {
-  //   font-size: 20px;
-  // }
+  @media (max-width: 600px) {
+    font-size: 23px;
+    width: 200px;
+    line-height: 2;
+  }
+  @media (min-width: 601px) and (max-width: 750px) {
+    font-size: 30px;
+    width: 230px;
+    line-height: 2;
+  }
+  @media (min-width: 751px) and (max-width: 960px) {
+    line-height: 2;
+  }
 }
 .carousel {
   height: 100%;
 }
 .landing-image {
   transform: rotateY(180deg);
+  @media (max-width: 600px) {
+    width: 90%;
+    position: absolute;
+    right: 10px;
+    bottom: 40px;
+  }
+  @media (min-width: 601px) and (max-width: 750px) {
+    width: 90%;
+    position: absolute;
+    right: 10px;
+    bottom: 40px;
+  }
+  @media (min-width: 751px) and (max-width: 960px) {
+    width: 80%;
+    position: absolute;
+    right: 10px;
+    bottom: 40px;
+  }
 }
 ::v-deep.main-button {
   font-size: 16px !important;
