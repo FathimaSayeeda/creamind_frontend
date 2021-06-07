@@ -37,7 +37,7 @@
                       </div>
                       <div
                         class="
-                          mx-5 mx-md-16
+                          mx-5 mx-sm-10 mx-md-16
                           px-md-10
                           mt-6 mt-md-11
                           d-flex
@@ -110,6 +110,10 @@ export default Vue.extend({
     height: 60vh !important;
     width: 90vw !important;
   }
+  @media (min-width: 601px) and (max-width: 960px) {
+    height: 62vh !important;
+    width: 85vw !important;
+  }
 }
 
 .circle {
@@ -144,6 +148,10 @@ export default Vue.extend({
     height: 60vh !important;
     width: 90vw !important;
   }
+  @media (min-width: 601px) and (max-width: 960px) {
+    height: 62vh !important;
+    width: 85vw !important;
+  }
 }
 .inner {
   background-color: transparent;
@@ -155,6 +163,10 @@ export default Vue.extend({
   @media (max-width: 600px) {
     height: 55vh !important;
     width: 85vw !important;
+  }
+  @media (min-width: 601px) and (max-width: 960px) {
+    height: 55vh !important;
+    width: 80vw !important;
   }
 }
 .quotes-start {
