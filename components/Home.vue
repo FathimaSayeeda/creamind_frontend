@@ -8,14 +8,16 @@
           <img :src="require('~/assets/creamind.svg')" /> kid can do.
         </div>
         <!-- <div class="text-h5">Explore our wide range of Genres</div> -->
-        <v-btn
-          outlined
-          tile
-          large
-          class="main-button mt-5 pa-5"
-          width="200px"
-          color="#099094"
-          >Explore.</v-btn
+        <nuxt-link class="nuxt-link" :to="{ path: '/books' }"
+          ><v-btn
+            outlined
+            tile
+            large
+            class="main-button mt-5 pa-5"
+            width="200px"
+            color="#099094"
+            >Explore.</v-btn
+          ></nuxt-link
         ></v-col
       ><v-spacer class="hidden-sm-and-down"></v-spacer>
       <v-spacer class="hidden-sm-and-down"></v-spacer>
@@ -105,5 +107,8 @@ export default {
   background-color: black;
   border: 3px solid black;
   font-family: 'Nexa-Black';
+}
+.nuxt-link {
+  text-decoration: none;
 }
 </style>
