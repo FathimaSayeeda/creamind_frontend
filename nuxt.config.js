@@ -26,7 +26,10 @@ export default {
   css: ['~/assets/style/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/vue-swiper.ts'],
+  plugins: [
+    '~/plugins/vue-swiper.ts',
+    '~/plugins/frappeclient.ts'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -46,6 +49,22 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
   ],
+
+  // @nuxt/http configs
+
+  http: {
+    baseURL: process.env.THECREAMIND_API,
+    headers: {
+      // frappe sends in text/html by default
+      "Accept": "application/json",
+      // https://frappeframework.com/docs/user/en/api/rest#1-token-based-authentication
+      "Authorization": `token ${process.env.CRAWLER_KEY}:${process.env.CRAWLER_SECRET}`
+    }
+  },
+
+  publicRuntimeConfig: {
+    THECREAMIND_API: process.env.THECREAMIND_API
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

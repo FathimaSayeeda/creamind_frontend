@@ -27,11 +27,11 @@
       >
         Advanced Search
         <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-        <!-- <v-img
+        <!-- <v-title_image
           width="12px"
           class="mx-4"
           :src="require('~/assets/dropdown.svg')"
-        ></v-img> -->
+        ></v-title_image> -->
       </v-btn>
     </div>
 
@@ -122,52 +122,40 @@
 }
 </style>
 
-<script>
-import Vue from 'vue'
-export default Vue.extend({
-  data() {
-    return {
-      show: false,
-      isShowing: false,
+<script lang="ts">
+import { Component, Action, Vue } from 'nuxt-property-decorator'
+import { CursorPaginator, GQLResponse } from '~/plugins/frappeclient'
+import { BookNode, SearchBooksParams } from '~/store/books'
 
-      books: [
-        {
-          name: "Charlotte's Web",
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook1.jpg'),
-        },
-        {
-          name: 'Roald Dahl Matilda',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook3.jpg'),
-        },
-        {
-          name: 'Roald Dahl Matilda',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook3.jpg'),
-        },
-        {
-          name: 'The cat in the hat',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook4.png'),
-        },
-        {
-          name: 'The cat in the hat',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook4.png'),
-        },
-        {
-          name: 'Roald Dahl Matilda',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook3.jpg'),
-        },
-        {
-          name: 'Roald Dahl Matilda',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook3.jpg'),
-        },
-      ],
-    }
-  },
-})
+@Component({})
+export class BooksPage extends Vue {
+  show = false
+  isShowing = false
+
+  @Action('books/searchBooks')
+  searchBooks!: (
+    args: SearchBooksParams
+  ) => Promise<CursorPaginator<BookNode>>
+
+  async fetch() {
+    // @ts-ignore
+    const bookCursor = await this.searchBooks({
+      first: 10,
+      filter: [{fieldname: "title_image", operator: "NEQ", value: ''}]
+    })
+    this.books = bookCursor.edges.map((x) => x.node)
+  }
+
+  mounted() {
+    console.log("ENV:", this.$config.THECREAMIND_API)
+  }
+
+  async fetchBooks() {
+
+  }
+
+  books: BookNode[] = []
+}
+
+export default BooksPage
 </script>

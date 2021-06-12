@@ -5,11 +5,11 @@
     max-height="320px"
     class="featured-card mx-5 my-5"
   >
-    <v-img :src="book.img" class="book-image" height="200px"></v-img>
+    <v-img :src="getUrl(book.title_image)" class="book-image" height="200px"></v-img>
 
     <marquee width="80%" height="50%" class="ml-5"
       ><v-card-title class="card-title">
-        {{ book.name }}
+        {{ book.title }}
       </v-card-title></marquee
     >
 
@@ -29,6 +29,11 @@
 import Vue from 'vue'
 export default Vue.extend({
   props: ['book'],
+  methods: {
+    getUrl(url: string) {
+      return this.$config.THECREAMIND_API + url
+    }
+  }
 })
 </script>
 
