@@ -1,6 +1,12 @@
 import colors from 'vuetify/es5/util/colors'
 import { getRoutes } from './routes'
 
+const polyfillFeatures = [
+  'fetch',
+  'Object.entries',
+  'IntersectionObserver',
+].join('%2C');
+
 export default {
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
@@ -15,6 +21,9 @@ export default {
       { hid: 'description', name: 'description', content: '' },
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    scripts: [
+      { src: `https://polyfill.io/v3/polyfill.min.js?features=${polyfillFeatures}`, body: true },
+    ]
   },
 
   // Static site generation
