@@ -98,7 +98,7 @@
           <v-col v-for="book in books" :key="book.name" cols="6" sm="6" md="3">
             <BookTile :book="book"></BookTile>
           </v-col>
-          <v-spacer></v-spacer
+          <v-spacer v-intersect.quiet="pageScrollBottom"></v-spacer
         ></v-row>
       </div>
     </v-responsive>
@@ -125,36 +125,52 @@
 <script lang="ts">
 import { Component, Action, Vue } from 'nuxt-property-decorator'
 import { CursorPaginator, GQLResponse } from '~/plugins/frappeclient'
+import { Author } from '~/store/authors'
 import { BookNode, SearchBooksParams } from '~/store/books'
 
 @Component({})
 export class BooksPage extends Vue {
   show = false
   isShowing = false
+  isLoading = false
+  books: BookNode[] = []
+  lastBookLoaded: string = ""
 
   @Action('books/searchBooks')
-  searchBooks!: (
-    args: SearchBooksParams
-  ) => Promise<CursorPaginator<BookNode>>
+  searchBooks!: (args: SearchBooksParams) => Promise<CursorPaginator<BookNode>>
+
+  @Action('authors/searchAuthorsLink')
+  searchAuthors!: (txt?: string) => Promise<Author[]>
 
   async fetch() {
-    // @ts-ignore
-    const bookCursor = await this.searchBooks({
-      first: 10,
-      filter: [{fieldname: "title_image", operator: "NEQ", value: ''}]
-    })
-    this.books = bookCursor.edges.map((x) => x.node)
+    await this.loadMoreBooks()
   }
 
   mounted() {
-    console.log("ENV:", this.$config.THECREAMIND_API)
+    console.info('ENV:', this.$config.THECREAMIND_API)
   }
 
-  async fetchBooks() {
-
+  pageScrollBottom() {
+    this.loadMoreBooks()
   }
 
-  books: BookNode[] = []
+  async loadMoreBooks() {
+    if (this.isLoading) {
+      return
+    }
+    this.isLoading = true
+    console.info('Loading books after', this.lastBookLoaded)
+    const bookCursor = await this.searchBooks({
+      first: 20,
+      after: this.lastBookLoaded,
+      filter: [{ fieldname: 'title_image', operator: 'NEQ', value: '' }],
+    })
+    this.lastBookLoaded = bookCursor.pageInfo.endCursor
+    console.info('Loaded till', this.lastBookLoaded)
+
+    this.books.push(...bookCursor.edges.map((x) => x.node))
+    this.isLoading = false
+  }
 }
 
 export default BooksPage
