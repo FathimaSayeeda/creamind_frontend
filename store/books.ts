@@ -27,6 +27,10 @@ export interface SearchBooksParams {
   after?: string
   before?: string
   filter?: DBFilterInput[]
+  sortBy?: {
+    direction: 'ASC' | 'DESC'
+    field: 'NAME' | 'TITLE'
+  }
 }
 
 // do not pass in module name here
@@ -42,25 +46,31 @@ export default class BooksStore extends VuexModule {
 
   @VuexAction
   public async getFeaturedBooks() {
-    const paginator = await this.context.dispatch('searchBooks', {
-      first: 10,
-      filter: [{ fieldname: 'is_featured', operator: 'EQ', value: "1" }],
-    })
+    const paginator: CursorPaginator<BookNode> = await this.context.dispatch(
+      'searchBooks',
+      {
+        first: 10,
+        filter: [{ fieldname: 'is_featured', operator: 'EQ', value: '1' }],
+      }
+    )
     return paginator.edges.map((x) => x.node)
   }
 
   @VuexAction
   public async searchBooks(
-    args: SearchBooksParams = { first: 10 }
+    args: SearchBooksParams = {
+      first: 10,
+      sortBy: { direction: 'ASC', field: 'NAME' },
+    }
   ): Promise<CursorPaginator<BookNode>> {
     return $frappe
       .graphql<{ Books: CursorPaginator<BookNode> }>(
         `
-    query BooksQuery($first: Int, $last: Int, $after: String, $before: String, $filter: [DBFilterInput!]) {
+    query BooksQuery($first: Int, $last: Int, $after: String, $before: String, $filter: [DBFilterInput!], $sortBy: BookSortingInput) {
       Books(
         first: $first, last: $last,
         after: $after, before: $before,
-        filter: $filter
+        filter: $filter, sortBy: $sortBy
       ) {
         totalCount
         pageInfo {
