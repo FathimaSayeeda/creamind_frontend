@@ -42,10 +42,11 @@ export default class BooksStore extends VuexModule {
 
   @VuexAction
   public async getFeaturedBooks() {
-    return this.searchBooks({
+    const paginator = await this.context.dispatch('searchBooks', {
       first: 10,
-      filter: [{ fieldname: 'is_featured', operator: 'EQ', value: 1 }],
+      filter: [{ fieldname: 'is_featured', operator: 'EQ', value: "1" }],
     })
+    return paginator.edges.map((x) => x.node)
   }
 
   @VuexAction
@@ -53,7 +54,7 @@ export default class BooksStore extends VuexModule {
     args: SearchBooksParams = { first: 10 }
   ): Promise<CursorPaginator<BookNode>> {
     return $frappe
-      .graphql<{ Books: CursorPaginator<BookNode>}>(
+      .graphql<{ Books: CursorPaginator<BookNode> }>(
         `
     query BooksQuery($first: Int, $last: Int, $after: String, $before: String, $filter: [DBFilterInput!]) {
       Books(

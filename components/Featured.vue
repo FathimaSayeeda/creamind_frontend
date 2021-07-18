@@ -12,37 +12,23 @@
   </v-responsive>
 </template>
 
-<script>
-import Vue from 'vue'
-export default Vue.extend({
-  data() {
-    return {
-      show: false,
-      books: [
-        {
-          name: "Charlotte's Web",
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook1.jpg'),
-        },
-        {
-          name: 'Pigeon',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook2.jpg'),
-        },
-        {
-          name: 'Roald Dahl Matilda',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook3.jpg'),
-        },
-        {
-          name: 'The cat in the hat',
-          sub_title: 'Fiction',
-          img: require('~/assets/templatebook4.png'),
-        },
-      ],
-    }
-  },
-})
+<script lang="ts">
+import { Vue, Component, Action } from 'nuxt-property-decorator'
+import { BookNode, SearchBooksParams } from '~/store/books'
+
+@Component({})
+export class FeaturedBooks extends Vue {
+  books: BookNode[] = []
+
+  @Action('books/getFeaturedBooks')
+  getFeaturedBooks!: () => Promise<BookNode[]>
+
+  async fetch() {
+    this.books = await this.getFeaturedBooks()
+  }
+}
+
+export default FeaturedBooks
 </script>
 <style scoped lang="scss">
 .card-title {
