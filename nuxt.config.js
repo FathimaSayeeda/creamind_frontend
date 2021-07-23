@@ -63,7 +63,7 @@ export default {
         domains: ['thecreamind.com', 'localhost']
       }
     },
-    debug: true,
+    debug: false,
     disableAutoPageTrack: false
   },
 
