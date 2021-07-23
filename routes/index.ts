@@ -11,10 +11,11 @@ export async function getRoutes(...args: any[]) {
 async function getAllBooks(): Promise<string[]> {
   const query = `
   {
-    Books(first: 999999) {
+    Books(first: 9999999) {
       edges {
         node {
           name
+          slug
         }
       }
     }
@@ -23,13 +24,9 @@ async function getAllBooks(): Promise<string[]> {
   const json_gql = {
     query,
   }
+  console.log("Invoking ", `${process.env.THECREAMIND_API}/api/method/graphql`)
   const r = await axios.post(`${process.env.THECREAMIND_API}/api/method/graphql`, json_gql)
-  console.log(r.data)
-  return r.data.data.Books.edges.map((x: {node: {name: string }}) => x.node.name)
+  const cursor_edges = r.data.data.Books.edges;
+  console.log("Got", cursor_edges.length, "Books")
+  return cursor_edges.map((x: {node: {slug: string }}) => x.node.slug)
 }
-
-// async function test() {
-//   console.log(await getAllBooks())
-// }
-
-// test()

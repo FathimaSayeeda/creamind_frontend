@@ -95,7 +95,7 @@
       <div class="featured">
         <v-row no-gutters class="justify-center mx-16"
           ><v-spacer></v-spacer>
-          <v-col v-for="book in books" :key="book.name" cols="6" sm="6" md="3">
+          <v-col v-for="book in books" :key="book.slug" cols="6" sm="6" md="3">
             <BookTile :book="book"></BookTile>
           </v-col>
           <v-spacer v-intersect.quiet="pageScrollBottom"></v-spacer

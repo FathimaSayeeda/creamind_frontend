@@ -17,7 +17,7 @@
       {{ book.sub_title || book.author }}
     </v-card-subtitle>
 
-    <nuxt-link :to="{ path: '/book/' + book.name }" class="nuxt-link"
+    <nuxt-link :to="{ path: '/book/' + book.slug }" class="nuxt-link"
       ><v-btn class="explore text-right ml-10" color="orange lighten-2" icon>
         Explore<v-icon>mdi-chevron-right</v-icon>
       </v-btn></nuxt-link

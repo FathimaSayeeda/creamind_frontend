@@ -85,7 +85,8 @@ export default class BooksStore extends VuexModule {
             name, title, is_featured, title_image,
             sub_title: sub_title__name,
             author: author__name,
-            publisher: publisher__name
+            publisher: publisher__name,
+            slug
           }
         }
       }
