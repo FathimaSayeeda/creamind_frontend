@@ -35,15 +35,15 @@
       :height="$vuetify.breakpoint.mdAndUp ? 110 : 80"
     >
       <v-toolbar-title class="mx-md-1 mx-lg-10 pb-2 pb-md-4">
-        <kinesis-container>
-          <kinesis-element :strength="20" type="depth">
+        <!-- <kinesis-container>
+          <kinesis-element :strength="20" type="depth"> -->
             <img
               :width="logoWidth"
               class="mx-auto"
               :src="require('~/assets/creamind-logo.svg')"
             />
-          </kinesis-element>
-        </kinesis-container>
+          <!-- </kinesis-element>
+        </kinesis-container> -->
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items

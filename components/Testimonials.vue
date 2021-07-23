@@ -8,7 +8,6 @@
             light
             hide-delimiters
             show-arrows-on-hover
-            v-model="model"
           >
             <v-carousel-item
               v-for="testimonial in testimonials"
