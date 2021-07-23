@@ -27,7 +27,11 @@ export interface GQLResponse<T> {
 }
 
 export class FrappeClient {
-  constructor(private $http: NuxtHTTPInstance) {}
+  base_url: string
+
+  constructor(private $http: NuxtHTTPInstance) {
+    this.base_url = this.$http.getBaseURL()
+  }
 
   public async call<T>(cmd: string, args: { [x: string]: any } = {}) {
     return this.$http
@@ -66,6 +70,10 @@ export class FrappeClient {
         // console.log("Get List Response", r)
         return (r as FrappeResponse<T[]>).message
       })
+  }
+
+  public getUrl(url: string): string {
+    return this.base_url + url
   }
 }
 

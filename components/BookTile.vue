@@ -5,7 +5,7 @@
     max-height="320px"
     class="featured-card mx-5 my-5"
   >
-    <v-img :src="getUrl(book.title_image)" class="book-image" height="200px"></v-img>
+    <v-img :src="$frappe.getUrl(book.title_image)" class="book-image" height="200px"></v-img>
 
     <marquee width="80%" height="50%" class="ml-5"
       ><v-card-title class="card-title">
@@ -28,12 +28,7 @@
 <script lang="ts">
 import Vue from 'vue'
 export default Vue.extend({
-  props: ['book'],
-  methods: {
-    getUrl(url: string) {
-      return this.$config.THECREAMIND_API + url
-    }
-  }
+  props: ['book'],  
 })
 </script>
 
