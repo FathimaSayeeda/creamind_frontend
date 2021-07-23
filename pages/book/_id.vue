@@ -101,9 +101,8 @@ export class BookPage extends Vue {
   async fetch() {
     this.bookLoaded = false;
     const slug = this.$route.params.id
-    console.log('Loading Book', slug)
+    console.info('Loading Book', slug)
     const book = await this.getBook(slug)
-    console.log(book)
     if (!book) {
       // redirect 404
       return

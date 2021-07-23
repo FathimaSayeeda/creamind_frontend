@@ -67,7 +67,6 @@ export class FrappeClient {
         searchParams: params,
       })
       .then((r) => {
-        // console.log("Get List Response", r)
         return (r as FrappeResponse<T[]>).message
       })
   }

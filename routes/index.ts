@@ -24,9 +24,9 @@ async function getAllBooks(): Promise<string[]> {
   const json_gql = {
     query,
   }
-  console.log("Invoking ", `${process.env.THECREAMIND_API}/api/method/graphql`)
+  console.info("Invoking ", `${process.env.THECREAMIND_API}/api/method/graphql`)
   const r = await axios.post(`${process.env.THECREAMIND_API}/api/method/graphql`, json_gql)
   const cursor_edges = r.data.data.Books.edges;
-  console.log("Got", cursor_edges.length, "Books")
+  console.info("Got", cursor_edges.length, "Books")
   return cursor_edges.map((x: {node: {slug: string }}) => x.node.slug)
 }

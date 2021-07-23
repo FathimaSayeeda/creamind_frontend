@@ -68,7 +68,7 @@ export default {
       // frappe sends in text/html by default
       "Accept": "application/json",
       // https://frappeframework.com/docs/user/en/api/rest#1-token-based-authentication
-      "Authorization": `token ${process.env.CRAWLER_KEY}:${process.env.CRAWLER_SECRET}`
+      // "Authorization": `token ${process.env.CRAWLER_KEY}:${process.env.CRAWLER_SECRET}`
     }
   },
 
