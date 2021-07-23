@@ -14,7 +14,7 @@
 
 <script lang="ts">
 import { Vue, Component, Action } from 'nuxt-property-decorator'
-import { BookNode, SearchBooksParams } from '~/store/books'
+import { BookNode } from '~/store/types'
 
 @Component({})
 export class FeaturedBooks extends Vue {
