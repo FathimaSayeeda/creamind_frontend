@@ -50,7 +50,16 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    // https://google-analytics.nuxtjs.org/
+    '@nuxtjs/google-analytics'
   ],
+
+  googleAnalytics: {
+    id: process.env.GOOGLE_ANALYTICS_ID,
+    autoTracking: {
+      screenview: true
+    }
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
