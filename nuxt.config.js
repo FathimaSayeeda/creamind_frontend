@@ -51,14 +51,20 @@ export default {
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     // https://google-analytics.nuxtjs.org/
-    '@nuxtjs/google-analytics'
+    '@nuxtjs/google-gtag'
   ],
 
   googleAnalytics: {
     id: process.env.GOOGLE_ANALYTICS_ID,
-    autoTracking: {
-      screenview: true
-    }
+    config: {
+      anonymize_ip: true, // anonymize IP 
+      send_page_view: false, // might be necessary to avoid duplicated page track on page reload
+      linker: {
+        domains: ['thecreamind.com', 'localhost']
+      }
+    },
+    debug: true,
+    disableAutoPageTrack: false
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
