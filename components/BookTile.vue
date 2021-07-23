@@ -14,7 +14,7 @@
     >
 
     <v-card-subtitle class="mt-n10">
-      {{ book.sub_title || book.author }}
+      {{ book.sub_title || book.author && book.author.title }}
     </v-card-subtitle>
 
     <nuxt-link :to="{ path: '/book/' + book.slug }" class="nuxt-link"

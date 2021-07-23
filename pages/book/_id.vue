@@ -7,28 +7,22 @@
           light
           hide-delimiter-background
           delimiter-icon="mdi-minus"
-          v-model="model"
           height="60vh"
         >
-          <v-carousel-item v-for="(image, i) in images" :key="i">
+          <v-carousel-item v-for="(m, i) in book.media" :key="i">
             <v-sheet height="100%" tile>
               <v-row class="fill-height" align="center" justify="center">
                 <v-img
                   height="60vh"
                   width="300px"
-                  :src="images[i]"
+                  :src="$frappe.getUrl(m.media_url)"
                   :contain="true"
                 ></v-img>
               </v-row>
             </v-sheet>
           </v-carousel-item> </v-carousel></v-col
       ><v-spacer></v-spacer
-      ><v-col
-        cols="12"
-        sm="6"
-        v-for="book in books"
-        :key="book.name"
-        class="px-4 mt-sm-6 px-md-16 mt-md-10"
+      ><v-col cols="12" sm="6" class="px-4 mt-sm-6 px-md-16 mt-md-10"
         ><div class="book-title">{{ book.name }}</div>
         <div class="subtitle">{{ book.subtitle }}</div>
 
@@ -47,8 +41,8 @@
             <div>-</div></v-col
           ><v-col
             ><div>{{ book.series }}</div>
-            <div>{{ book.author }}</div>
-            <div>{{ book.publisher }}</div>
+            <div>{{ book.author.title }}</div>
+            <div>{{ book.publisher.title }}</div>
             <div>{{ book.categories }}</div>
             <div>{{ book.agegroups }}</div></v-col
           ></v-row
@@ -86,35 +80,40 @@
     ></v-img>
   </div>
 </template>
-<script>
-import Vue from 'vue'
-export default Vue.extend({
-  data() {
-    return {
-      id: this.$route.params.id,
-      books: [
-        {
-          name: "Charlotte's Web",
-          subtitle: 'Subtitle',
-          author: 'Lauren Child',
-          publisher: 'Tiger Aspect',
-          series: 'Charlie and Lola',
-          categories: 'Cartoon Series',
-          agegroups: '5-6 years, 3-4 years',
-          type: 'paperback',
-          pages: '24',
-          price: '₹290($3.99)',
-        },
-      ],
-      images: [
-        require('~/assets/templatebook1.jpg'),
-        require('~/assets/book-img2.png'),
-        require('~/assets/book-img3.png'),
-        require('~/assets/book-img4.png'),
-      ],
+<script lang="ts">
+import { Component, Action, Vue } from 'nuxt-property-decorator'
+import { BookNode } from '~/store/types'
+
+@Component({})
+export class BookPage extends Vue {
+  book: BookNode = {
+    author: {},
+    publisher: {}
+  } as BookNode
+  bookLoaded = false
+
+  @Action('blowUrl')
+  blowUrl!: (url: string) => string
+
+  @Action('books/getBook')
+  getBook!: (slug: string) => Promise<BookNode | null>
+
+  async fetch() {
+    this.bookLoaded = false;
+    const slug = this.$route.params.id
+    console.log('Loading Book', slug)
+    const book = await this.getBook(slug)
+    console.log(book)
+    if (!book) {
+      // redirect 404
+      return
     }
-  },
-})
+    this.book = book;
+    this.bookLoaded = true;
+  }
+}
+
+export default BookPage
 </script>
 <style scoped lang="scss">
 ::v-deep.v-btn__content {

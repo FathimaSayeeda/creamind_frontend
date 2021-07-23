@@ -10,16 +10,9 @@ import {
   GQLResponse,
   DBFilterInput,
 } from '~/plugins/frappeclient'
+import { BookNode, Author } from './types'
 
-export interface BookNode {
-  title: string
-  name: string
-  is_featured: boolean
-  sub_title: string
-  title_image: string
-  author: string
-  publisher: string
-}
+
 
 export interface SearchBooksParams {
   first?: number
@@ -42,6 +35,52 @@ export default class BooksStore extends VuexModule {
   @VuexMutation
   incrWheels(extra: number) {
     this.wheels += extra
+  }
+
+  @VuexAction
+  public async getBook(slug: string): Promise<BookNode | null> {
+    const gql = await $frappe.graphql<{ getDocBySlug: BookNode | null }>(
+      `query GetBookBySlug($slug: String!) {
+        getDocBySlug(doctype: "Book", slug: $slug) {
+            name
+            doctype
+            ...on Book {
+                slug title sub_title: sub_title__name
+                title_image description isbn retail_price
+                is_featured
+                categories {
+                  book_category {
+                      title slug
+                  }
+                }
+                age_groups {
+                    age_group {
+                        title, slug
+                    }
+                }
+                author {
+                    slug title
+                }
+                publisher {
+                    slug title
+                }
+                book_series {
+                    slug title
+                }
+                book_series_idx
+                media {
+                    media_url
+                    type
+                    alt
+                    title
+                }
+            }
+        }
+    }`,
+      { slug }
+    )
+
+    return gql.data.getDocBySlug
   }
 
   @VuexAction
@@ -82,10 +121,14 @@ export default class BooksStore extends VuexModule {
         edges {
           cursor
           node {
-            name, title, is_featured, title_image,
+            title, is_featured, title_image,
             sub_title: sub_title__name,
-            author: author__name,
-            publisher: publisher__name,
+            author {
+              title slug
+            }
+            publisher {
+              title slug
+            }
             slug
           }
         }

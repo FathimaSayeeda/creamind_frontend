@@ -98,8 +98,13 @@
           <v-col v-for="book in books" :key="book.slug" cols="6" sm="6" md="3">
             <BookTile :book="book"></BookTile>
           </v-col>
-          <v-spacer v-intersect.quiet="pageScrollBottom"></v-spacer
-        ></v-row>
+          <v-spacer v-intersect.quiet="pageScrollBottom"></v-spacer>
+          <v-progress-linear
+            v-if="isLoading"
+            class="my-2"
+            indeterminate
+          ></v-progress-linear>
+        </v-row>
       </div>
     </v-responsive>
   </div>
@@ -125,8 +130,8 @@
 <script lang="ts">
 import { Component, Action, Vue } from 'nuxt-property-decorator'
 import { CursorPaginator, GQLResponse } from '~/plugins/frappeclient'
-import { Author } from '~/store/authors'
-import { BookNode, SearchBooksParams } from '~/store/books'
+import { Author, BookNode } from '~/store/types'
+import { SearchBooksParams } from '~/store/books'
 
 @Component({})
 export class BooksPage extends Vue {
@@ -134,7 +139,7 @@ export class BooksPage extends Vue {
   isShowing = false
   isLoading = false
   books: BookNode[] = []
-  lastBookLoaded: string = ""
+  lastBookLoaded: string = ''
 
   @Action('books/searchBooks')
   searchBooks!: (args: SearchBooksParams) => Promise<CursorPaginator<BookNode>>

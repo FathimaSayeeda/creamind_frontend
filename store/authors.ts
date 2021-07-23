@@ -1,10 +1,6 @@
 import { VuexModule, Module, VuexAction } from 'nuxt-property-decorator'
 import { $frappe, CursorPaginator, DBFilterInput } from '~/plugins/frappeclient'
-
-export interface Author {
-  name: string
-  title: string
-}
+import { Author } from './types'
 
 @Module({ namespaced: true, stateFactory: true })
 export default class AuthorsStore extends VuexModule {
