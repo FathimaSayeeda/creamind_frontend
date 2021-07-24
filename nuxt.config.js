@@ -49,19 +49,14 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/vuetify
-    '@nuxtjs/vuetify',
-    // https://google-analytics.nuxtjs.org/
-    '@nuxtjs/google-gtag'
+    '@nuxtjs/vuetify'
   ],
 
-  googleAnalytics: {
-    id: process.env.GOOGLE_ANALYTICS_ID,
+  'google-gtag': {
+    id: process.env.GA4_MEASUREMENT_ID,
     config: {
       anonymize_ip: true, // anonymize IP 
-      send_page_view: false, // might be necessary to avoid duplicated page track on page reload
-      linker: {
-        domains: ['thecreamind.com', 'localhost']
-      }
+      send_page_view: true, // might be necessary to avoid duplicated page track on page reload
     },
     debug: false,
     disableAutoPageTrack: false
@@ -73,6 +68,8 @@ export default {
     '@nuxt/http',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    // https://github.com/nuxt-community/google-gtag-module
+    '@nuxtjs/google-gtag'
   ],
 
   // @nuxt/http configs
