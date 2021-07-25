@@ -1,6 +1,6 @@
 <template>
   <div class="home" style="position: relative">
-    <v-row no-gutters
+    <v-row no-gutters class="mt-md-16"
       ><v-spacer class="hidden-sm-and-down"></v-spacer
       ><v-col class="ml-5 ml-sm-15 mt-xl-16 pt-xl-16" cols="6" md="3"
         ><div class="tagline">
@@ -79,11 +79,17 @@ export default {
 }
 .landing-image {
   transform: rotateY(180deg);
-  @media (max-width: 600px) {
+  @media (max-width: 450px) {
     width: 300px;
     position: absolute;
     right: 10px;
-    bottom: 40px;
+    bottom: 100px;
+  }
+  @media (min-width: 451px) and (max-width: 600px) {
+    width: 400px;
+    position: absolute;
+    right: 10px;
+    bottom: 200px;
   }
   @media (min-width: 601px) and (max-width: 750px) {
     width: 350px;

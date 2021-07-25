@@ -8,7 +8,6 @@
         <v-text-field
           label="Search"
           placeholder="Search by a keyword!"
-          rounded
           outlined
           color="#D22D43"
         ></v-text-field></v-col
@@ -47,7 +46,6 @@
           dense
           label="Category"
           placeholder="Category"
-          rounded
           outlined
           color="#D22D43"
         ></v-autocomplete>
@@ -57,7 +55,6 @@
           dense
           label="Author"
           placeholder="Author"
-          rounded
           outlined
           color="#D22D43"
         ></v-autocomplete>
@@ -67,7 +64,6 @@
           dense
           label="Publisher"
           placeholder="Publisher"
-          rounded
           outlined
           color="#D22D43"
         ></v-autocomplete>
@@ -77,7 +73,6 @@
           dense
           label="Series"
           placeholder="Series"
-          rounded
           outlined
           color="#D22D43"
         ></v-autocomplete>
@@ -86,15 +81,14 @@
         <v-autocomplete
           dense
           label="Age group"
-          rounded
           outlined
           color="#D22D43"
         ></v-autocomplete> </v-col
     ></v-row>
     <v-responsive max-width="1300px" class="margined white--text mx-auto">
       <div class="featured">
-        <v-row no-gutters class="justify-center mx-16"
-          ><v-spacer></v-spacer>
+        <v-row no-gutters class="justify-center mx-md-16"
+          ><v-spacer class="hidden-sm-and-down"></v-spacer>
           <v-col v-for="book in books" :key="book.slug" cols="6" sm="6" md="3">
             <BookTile :book="book"></BookTile>
           </v-col>

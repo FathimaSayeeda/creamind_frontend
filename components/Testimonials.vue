@@ -1,59 +1,54 @@
 <template>
   <div id="testimonials">
-    <v-responsive max-width="1300px" class="margined mx-auto">
-      <div class="testimonials pb-14">
-        <h1 class="test-title px-6 px-sm-10 px-md-16 pt-10">Testimonials</h1>
-        <v-row no-gutters class="justify-center">
-          <v-carousel
-            light
-            hide-delimiters
-            show-arrows-on-hover
-          >
-            <v-carousel-item
-              v-for="testimonial in testimonials"
-              :key="testimonial.name"
-            >
-              <v-sheet tile>
-                <div class="pt-md-5 d-flex justify-center">
-                  <div class="outer d-flex justify-center align-center">
-                    <div class="inner">
-                      <img
-                        width="70px"
-                        class="quotes-start"
-                        :src="require('~/assets/quotes.svg')"
-                      />
-                      <img
-                        width="70px"
-                        class="quotes-end"
-                        :src="require('~/assets/quotes.svg')"
-                      />
+    <div class="test-title d-flex justify-center">
+      Here's why Parents choose
+    </div>
+    <div class="d-flex mt-4 mb-8 justify-center">
+      <img
+        class="mb-2 mx-md-3"
+        :src="require('~/assets/thecreamind-text.svg')"
+      />
+    </div>
+    <div class="testimonials d-flex justify-center pb-14">
+      <swiper
+        ref="mySwiper"
+        :options="swiperOptions"
+        class="swiper-container py-4"
+      >
+        <swiper-slide
+          v-for="(testimonial, i) in testimonials"
+          :key="i"
+          class="swiper-slide"
+          ><v-card class="test-card py-8">
+            <img
+              width="35px"
+              class="quotes-start"
+              :src="require('~/assets/quotes.svg')"
+            />
+            <img
+              width="35px"
+              class="quotes-end"
+              :src="require('~/assets/quotes.svg')"
+            />
+            <div class="d-flex flex-no-wrap justify-space-between">
+              <div>
+                <div class="mx-10">{{ testimonial.text }}</div>
+                <hr class="line" />
 
-                      <div class="d-flex justify-center">
-                        <img class="mt-10 circle" :src="testimonial.avatar" />
-                      </div>
-                      <div class="name d-flex justify-center">
-                        {{ testimonial.name }}
-                      </div>
-                      <div
-                        class="
-                          mx-5 mx-sm-10 mx-md-16
-                          px-md-10
-                          mt-6 mt-md-11
-                          d-flex
-                          justify-center
-                        "
-                      >
-                        {{ testimonial.text }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </v-sheet>
-            </v-carousel-item>
-          </v-carousel></v-row
-        >
-      </div>
-    </v-responsive>
+                <v-img
+                  class="circle mt-3 mx-10"
+                  :contain="true"
+                  :src="testimonial.avatar"
+                ></v-img>
+
+                <div class="mx-10 activity-sub" v-text="testimonial.name"></div>
+              </div>
+            </div> </v-card
+        ></swiper-slide>
+
+        <div class="swiper-pagination" slot="pagination"></div>
+      </swiper>
+    </div>
   </div>
 </template>
 
@@ -84,12 +79,65 @@ export default Vue.extend({
           text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,',
         },
       ],
+      swiperOptions: {
+        slidesPerView: 3.1,
+        spaceBetween: 10,
+        freeMode: true,
+        breakpoints: {
+          250: {
+            slidesPerView: 1.2,
+            spaceBetween: 10,
+          },
+          450: {
+            slidesPerView: 1.5,
+            spaceBetween: 10,
+          },
+          600: {
+            slidesPerView: 1.6,
+            spaceBetween: 10,
+          },
+
+          960: {
+            slidesPerView: 1.9,
+            spaceBetween: 10,
+          },
+          1300: {
+            slidesPerView: 2.5,
+            spaceBetween: 10,
+          },
+          2000: {
+            slidesPerView: 3.1,
+            spaceBetween: 10,
+          },
+        },
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        },
+        // Some Swiper option/callback...
+      },
     }
   },
 })
 </script>
 
 <style scoped lang="scss">
+.swiper-container {
+  // height: 300px;
+  padding: 50px auto;
+  margin: auto 15vw;
+  @media (max-width: 600px) {
+    margin: auto 3vw;
+  }
+}
+.swiper-slide {
+  position: relative;
+}
+.test-title {
+  font-size: 30px;
+  font-family: 'Nexa-Bold';
+  color: black;
+}
 .test-title {
   font-size: 30px;
   font-family: 'Nexa-Bold';
@@ -100,34 +148,41 @@ export default Vue.extend({
     font-size: 27px;
   }
 }
-::v-deep.v-carousel,
-.v-sheet {
-  height: 450px !important;
-  width: 800px !important;
-  background: transparent !important;
-  @media (max-width: 600px) {
-    height: 60vh !important;
-    width: 90vw !important;
-  }
-  @media (min-width: 601px) and (max-width: 960px) {
-    height: 62vh !important;
-    width: 85vw !important;
-  }
-}
+
+// ::v-deep.v-card {
+//   height: 500px !important;
+// }
+
+// ::v-deep.v-card {
+//   width: 1000px !important;
+// }
+// ::v-deep.v-carousel,
+// .v-sheet {
+//   height: 450px !important;
+//   width: 800px !important;
+//   background: transparent !important;
+//   @media (max-width: 600px) {
+//     height: 60vh !important;
+//     width: 90vw !important;
+//   }
+//   @media (min-width: 601px) and (max-width: 960px) {
+//     height: 62vh !important;
+//     width: 85vw !important;
+//   }
+// }
 
 .circle {
-  width: 5em;
-  height: 5em;
+  width: 3em;
+  height: 3em;
   border-radius: 50%;
-  border: 2px solid rgb(116, 233, 227);
+  border: 2px solid rgb(127, 177, 174);
 
   background-color: white;
 }
 .testimonials {
   color: black;
-  font-family: 'Nexa-Regular';
-
-  line-height: 2;
+  font-family: 'Nexa-Bold';
+  font-size: 14px;
   text-align: justify;
 }
 .test-text {
@@ -152,31 +207,42 @@ export default Vue.extend({
     width: 85vw !important;
   }
 }
-.inner {
-  background-color: transparent;
-  height: 360px;
-  width: 760px;
-  border-radius: 25px;
-  border: 3px solid #d22d43;
-  position: relative;
-  @media (max-width: 600px) {
-    height: 55vh !important;
-    width: 85vw !important;
-  }
-  @media (min-width: 601px) and (max-width: 960px) {
-    height: 55vh !important;
-    width: 80vw !important;
-  }
-}
+// .inner {
+//   background-color: transparent;
+//   height: 100px;
+//   width: 100px;
+
+//   border-radius: 50px;
+//   border: 1px solid #d22d43;
+//   position: absolute;
+// @media (max-width: 600px) {
+//   height: 55vh !important;
+//   width: 85vw !important;
+// }
+// @media (min-width: 601px) and (max-width: 960px) {
+//   height: 55vh !important;
+//   width: 80vw !important;
+// }
+// }
 .quotes-start {
   position: absolute;
   left: 30px;
-  top: -40px;
+  top: -20px;
+  color: red;
 }
 .quotes-end {
   position: absolute;
   right: 30px;
-  bottom: -40px;
+  bottom: -20px;
   transform: rotate(180deg);
+}
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid rgb(226, 224, 224);
+  margin: 1.5em 3em;
+  padding: 0;
 }
 </style>
