@@ -38,7 +38,8 @@ export default {
   plugins: [
     '~/plugins/asyncSleep.ts',
     '~/plugins/vue-swiper.ts',
-    '~/plugins/frappeclient.ts'
+    '~/plugins/frappeclient.ts',
+    '~/plugins/vue-googlemaps.ts',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -85,7 +86,8 @@ export default {
   },
 
   publicRuntimeConfig: {
-    THECREAMIND_API: process.env.THECREAMIND_API
+    THECREAMIND_API: process.env.THECREAMIND_API,
+    GMAPS_API_KEY: process.env.GMAPS_API_KEY
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
