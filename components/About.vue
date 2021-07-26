@@ -1,5 +1,6 @@
 <template>
-  <div id="about">
+  <div>
+    <a class="anchor" id="about"></a>
     <v-responsive max-width="1300px" class="margined mx-auto">
       <div class="about pb-14">
         <h1 class="about-title px-6 px-sm-10 px-md-16 pt-10">
@@ -52,5 +53,11 @@
   @media (max-width: 600px) {
     font-size: 14px;
   }
+}
+a.anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
 }
 </style>

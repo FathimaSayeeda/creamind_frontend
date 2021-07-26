@@ -1,5 +1,6 @@
 <template>
-  <div id="activities">
+  <div>
+    <a class="anchor" id="activities"></a>
     <div class="activities pb-16">
       <v-responsive max-width="1300px" class="margined mb-16 mx-auto">
         <div class="activities-title px-16 pt-10">
@@ -205,5 +206,11 @@ hr {
   border-top: 1px solid rgb(226, 224, 224);
   margin: -1em 3em;
   padding: 0;
+}
+a.anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
 }
 </style>

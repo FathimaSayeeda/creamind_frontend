@@ -2,7 +2,7 @@
   <div id="contactus">
     <v-responsive max-width="1300px" class="margined mx-auto">
       <div class="pb-14">
-        <h1 class="test-title px-6 px-sm-10 px-md-16 pt-10">Contact Us</h1>
+        <h1 class="contact-title px-6 px-sm-10 px-md-16 pt-10">Contact Us</h1>
         <v-row no-gutters class="justify-center">
           <googlemaps-map
             class="map"
@@ -268,9 +268,14 @@ export default Vue.extend({
 })
 </script>
 
-<style>
+<style scoped lang="scss">
 .map {
   height: 30vh;
   min-width: 50vw;
+}
+.contact-title {
+  font-size: 30px;
+  font-family: 'Nexa-Bold';
+  color: black;
 }
 </style>
