@@ -331,7 +331,7 @@ export default Vue.extend({
   box-sizing: border-box;
 }
 .social-media-links:hover {
-  transform: scale(1.3);
+  transform: scale(1.15);
   border: 2px solid black;
   border-radius: 50px;
 }
