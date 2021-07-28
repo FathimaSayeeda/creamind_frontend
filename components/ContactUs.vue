@@ -4,14 +4,45 @@
       <div class="pb-14">
         <h1 class="contact-title px-6 px-sm-10 px-md-16 pt-10">Contact Us</h1>
         <v-row no-gutters class="justify-center">
-          <googlemaps-map
-            class="map"
-            :options="map_options"
-            :center.sync="thecreamind_loc"
-            :zoom.sync="zoom"
-          >
-            <googlemaps-marker :icon="markerIcon" :position="thecreamind_loc" />
-          </googlemaps-map>
+          <v-col cols="5">
+            <googlemaps-map
+              class="map"
+              :options="map_options"
+              :center.sync="thecreamind_loc"
+              :zoom.sync="zoom"
+            >
+              <googlemaps-marker
+                :icon="markerIcon"
+                :position="thecreamind_loc"
+              /> </googlemaps-map
+          ></v-col>
+          <v-col class="address mx-10" cols="3"
+            ><div class="address-title mb-5">ADDRESS</div>
+            <div>The Crea Mind</div>
+            <div>Thaazhe Angadi Road</div>
+            <div>Near Jyothi Hospital</div>
+            <div>Mananathawady</div>
+            <div>Wayanad district</div>
+            <div>Kerala, India</div>
+            <div>Pin: 670645</div>
+            <div class="mob my-6">Call us at: +91 90744 17193</div></v-col
+          ><v-col
+            ><v-row
+              ><img
+                class="social-media-links mx-3"
+                width="50"
+                :src="require('~/assets/whatsapp.svg')" /><img
+                class="social-media-links mx-3"
+                width="50"
+                :src="require('~/assets/fb.svg')" /><img
+                class="social-media-links mx-3"
+                width="50"
+                :src="require('~/assets/insta.svg')" /><img
+                class="social-media-links mx-3"
+                width="50"
+                :src="require('~/assets/youtube.svg')"
+            /></v-row>
+          </v-col>
         </v-row>
       </div>
     </v-responsive>
@@ -270,12 +301,38 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .map {
-  height: 30vh;
-  min-width: 50vw;
+  height: 35vh;
+  // min-width: 30vw;
 }
 .contact-title {
   font-size: 30px;
   font-family: 'Nexa-Bold';
   color: black;
+}
+.address-title {
+  font-size: 20px;
+  font-family: 'Nexa-Bold';
+  color: black;
+  letter-spacing: 3px;
+}
+.address {
+  font-size: 14px;
+  font-family: 'Nexa-Regular';
+  color: black;
+  letter-spacing: 2px;
+}
+.mob {
+  font-size: 20px;
+  font-family: 'Nexa-Bold';
+  color: black;
+  letter-spacing: 2px;
+}
+.social-media-links {
+  box-sizing: border-box;
+}
+.social-media-links:hover {
+  transform: scale(1.3);
+  border: 2px solid black;
+  border-radius: 50px;
 }
 </style>

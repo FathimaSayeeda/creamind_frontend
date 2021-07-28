@@ -29,13 +29,12 @@
                 </v-avatar>
                 <!-- <hr /> -->
                 <v-card-title class="activity-name"
-                  ><div class="mr-3">{{ activity.name1 }}</div>
-                  <div>{{ activity.name2 }}</div></v-card-title
-                >
+                  ><div class="mr-3">{{ activity.title }}</div>
+                </v-card-title>
 
                 <v-card-subtitle
                   class="activity-sub"
-                  v-text="activity.name1"
+                  v-text="activity.subtitle"
                 ></v-card-subtitle>
               </div>
             </div> </v-card
@@ -43,34 +42,6 @@
 
         <div class="swiper-pagination" slot="pagination"></div>
       </swiper>
-
-      <!-- <v-row dense class="d-flex flex-nowrap pt-md-5">
-        <v-col v-for="(activity, i) in activities" :key="i" cols="10" md="3">
-          <v-card class="acitivity-card py-10" height="250px">
-            <div class="d-flex flex-no-wrap justify-space-between">
-              <div>
-                <v-avatar class="ma-3" size="60" rounded="">
-                  <v-img
-                    class="clip-circle ma-16"
-                    :contain="true"
-                    :src="activity.icon"
-                  ></v-img>
-                </v-avatar>
-                <hr />
-                <v-card-title class="activity-name"
-                  ><div class="mr-3">{{ activity.name1 }}</div>
-                  <div>{{ activity.name2 }}</div></v-card-title
-                >
-
-                <v-card-subtitle
-                  class="activity-sub"
-                  v-text="activity.name1"
-                ></v-card-subtitle>
-              </div>
-            </div>
-          </v-card>
-        </v-col>
-      </v-row> -->
     </div>
   </div>
 </template>
@@ -116,54 +87,58 @@ export default Vue.extend({
       },
       activities: [
         {
-          name1: 'Library Services',
-          name2: '',
+          title: 'Library Services',
+          subtitle: 'Well facilitated library for kids.',
           icon: require('~/assets/library.svg'),
         },
         {
-          name1: 'On-demand ',
-          name2: 'Bookstore',
+          title: 'Bookstore ',
+          subtitle: 'Books added on demand.',
           icon: require('~/assets/ondemand.svg'),
         },
         {
-          name1: 'Theme-based',
-          name2: 'activity workshops',
+          title: 'Workshops',
+          subtitle: 'Theme based activity workshops.',
           icon: require('~/assets/workshops.svg'),
         },
         {
-          name1: 'Self grooming ',
-          name2: 'for kids',
+          title: 'Grooming ',
+          subtitle: 'Self-grooming for kids.',
           icon: require('~/assets/grooming.svg'),
         },
         {
-          name1: 'Free Guidance session ',
-          name2: 'for parents',
+          title: 'Guidance Sessions ',
+          subtitle: 'Free guidance sessions for parents.',
           icon: require('~/assets/guidance.svg'),
         },
         {
-          name1: 'Educational',
-          name2: 'Toy store',
+          title: 'Toy store',
+          subtitle: 'Collection of educational toys.',
           icon: require('~/assets/toystore.svg'),
         },
         {
-          name1: 'Competitions',
-          name2: ' (Quizzes, etc.)',
+          title: 'Competitions',
+          subtitle: 'Quizzes, et cetera.',
           icon: require('~/assets/competitions.svg'),
         },
         {
-          name1: 'Skill Development',
+          title: 'Skill Development',
+          subtitle: 'BAsic skill development classes.',
           icon: require('~/assets/skill.svg'),
         },
         {
-          name1: 'Self Development',
+          title: 'Self Development',
+          subtitle: 'Self Development workshops.',
           icon: require('~/assets/selfdev.svg'),
         },
         {
-          name1: 'Educational Aids',
+          title: 'Educational Aids',
+          subtitle: "Aiding your kid's education.",
           icon: require('~/assets/aids.svg'),
         },
         {
-          name1: 'Summer Camps',
+          title: 'Summer Camps',
+          subtitle: 'Summer camps for kids.',
           icon: require('~/assets/camps.svg'),
         },
       ],
