@@ -41,8 +41,8 @@
             <div>-</div></v-col
           ><v-col
             ><div>{{ book.series }}</div>
-            <div>{{ book.author.title }}</div>
-            <div>{{ book.publisher.title }}</div>
+            <div>{{ (book.author || {}).title }}</div>
+            <div>{{ (book.publisher || {}).title }}</div>
             <div>{{ book.categories }}</div>
             <div>{{ book.agegroups }}</div></v-col
           ></v-row
