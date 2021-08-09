@@ -29,6 +29,8 @@ export default {
   // Static site generation
   generate: {
     routes: getRoutes,
+    concurrency: 5,
+    interval: 0,
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
