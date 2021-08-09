@@ -1,8 +1,11 @@
 <template>
-  <div id="contactus">
+  <div>
+    <a class="anchor" id="contact"></a>
     <v-responsive max-width="1300px" class="margined mx-auto">
       <div class="pb-14">
-        <h1 class="contact-title px-6 px-sm-10 px-md-16 pt-10">Contact Us</h1>
+        <h1 class="contact-title px-6 px-sm-10 px-md-16 pt-10 mb-7">
+          Contact Us
+        </h1>
         <v-row no-gutters class="justify-center">
           <v-col cols="5">
             <googlemaps-map
@@ -28,20 +31,31 @@
             <div class="mob my-6">Call us at: +91 90744 17193</div></v-col
           ><v-col
             ><v-row
-              ><img
-                class="social-media-links mx-3"
-                width="50"
-                :src="require('~/assets/whatsapp.svg')" /><img
-                class="social-media-links mx-3"
-                width="50"
-                :src="require('~/assets/fb.svg')" /><img
-                class="social-media-links mx-3"
-                width="50"
-                :src="require('~/assets/insta.svg')" /><img
-                class="social-media-links mx-3"
-                width="50"
-                :src="require('~/assets/youtube.svg')"
-            /></v-row>
+              ><a href="https://wa.me/+919074417193/" target="_blank"
+                ><img
+                  class="social-media-links mx-3"
+                  width="50"
+                  :src="require('~/assets/whatsapp.svg')" /></a
+              ><a
+                href="https://www.facebook.com/pages/category/Education/The-crea-mind-106531721629148/"
+                target="_blank"
+                ><img
+                  class="social-media-links mx-3"
+                  width="50"
+                  :src="require('~/assets/fb.svg')" /></a
+              ><a href="https://www.instagram.com/thecreamind" target="_blank"
+                ><img
+                  class="social-media-links mx-3"
+                  width="50"
+                  :src="require('~/assets/insta.svg')" /></a
+              ><a
+                href="https://www.youtube.com/channel/UC7Ks7jfYmAKU6RWJWiOoPvQ/featured"
+                target="_blank"
+                ><img
+                  class="social-media-links mx-3"
+                  width="50"
+                  :src="require('~/assets/youtube.svg')" /></a
+            ></v-row>
           </v-col>
         </v-row>
       </div>
@@ -324,7 +338,7 @@ export default Vue.extend({
 .mob {
   font-size: 20px;
   font-family: 'Nexa-Bold';
-  color: black;
+  color: #099094;
   letter-spacing: 2px;
 }
 .social-media-links {
@@ -334,5 +348,11 @@ export default Vue.extend({
   transform: scale(1.15);
   border: 2px solid black;
   border-radius: 50px;
+}
+a.anchor {
+  display: block;
+  position: relative;
+  top: -150px;
+  visibility: hidden;
 }
 </style>
