@@ -1,31 +1,27 @@
-export interface Author {
+export interface BaseNode {
+  name: string
   slug: string
   title: string
 }
 
-export interface Publisher {
-  title: string
-  slug: string
-}
+export interface Author extends BaseNode {}
 
-export interface AgeGroup {
-  title: string
-  slug: string
-}
+export interface Publisher extends BaseNode {}
 
-export interface BookCategory {
-  title: string
-  slug: string
-}
+export interface AgeGroup extends BaseNode {}
 
-export interface BookNode {
-  title: string
+export interface BookCategory extends BaseNode {}
+
+export interface BookSeries extends BaseNode {}
+
+export interface BookNode extends BaseNode {
+  // title: string
+  // slug: string
   is_featured: boolean
   sub_title: string
   title_image: string
   author: Author
   publisher: Publisher
-  slug: string
 }
 
 export interface Book extends BookNode {

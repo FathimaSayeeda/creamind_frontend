@@ -1,20 +1,20 @@
 import { VuexModule, Module, VuexAction } from 'nuxt-property-decorator'
 import { $frappe, CursorPaginator, DBFilterInput } from '~/plugins/frappeclient'
-import { Author } from './types'
+import { BookCategory } from './types'
 
 @Module({ namespaced: true, stateFactory: true })
-export default class AuthorsStore extends VuexModule {
+export default class BookCategoriesStore extends VuexModule {
   @VuexAction
-  public async searchAuthors(txt?: string) {
+  public async searchCategories(txt?: string) {
     const filter: DBFilterInput[] = []
     if (txt) {
       filter.push({ fieldname: 'title', operator: 'LIKE', value: `%${txt}%` })
     }
     return $frappe
-      .graphql<{ Authors: CursorPaginator<Author> }>(
+      .graphql<{ BookCategorys: CursorPaginator<BookCategory> }>(
         `
-    query AuthorQuery($filter: [DBFilterInput!]) {
-      Authors(first: 10, filter: $filter) {
+    query BookCategories($filter: [DBFilterInput!]) {
+      BookCategorys(first: 10, filter: $filter) {
         edges {
           node {
             title
@@ -29,6 +29,6 @@ export default class AuthorsStore extends VuexModule {
           filter,
         }
       )
-      .then((r) => r.data.Authors.edges.map((x) => x.node))
+      .then((r) => r.data.BookCategorys.edges.map((x) => x.node))
   }
 }
