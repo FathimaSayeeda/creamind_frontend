@@ -1,4 +1,4 @@
-import { $frappe, CursorPaginator, DBFilterInput } from '~/plugins/frappeclient'
+import { $frappe, CursorPaginator, DBFilterInput, DBFilterOperator } from '~/plugins/frappeclient'
 import { VuexModule, Module, VuexAction } from 'nuxt-property-decorator'
 import { AgeGroup } from './types'
 
@@ -8,7 +8,7 @@ export default class AgeGroupStore extends VuexModule {
   public async searchAgeGroups(txt?: string) {
     const filter: DBFilterInput[] = []
     if (txt) {
-      filter.push({ fieldname: 'title', operator: 'LIKE', value: `%${txt}%` })
+      filter.push({ fieldname: 'title', operator: DBFilterOperator.LIKE, value: `%${txt}%` })
     }
     return $frappe
       .graphql<{ AgeGroups: CursorPaginator<AgeGroup> }>(

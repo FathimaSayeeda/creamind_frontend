@@ -42,30 +42,34 @@
       ><v-col cols="12" md="2">
         <v-col>Search by</v-col>
       </v-col>
+      <!-- Book Category -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
         <v-autocomplete
           dense
           label="Category"
           placeholder="Category"
           outlined
+          clearable
           color="#D22D43"
           :loading="loading.bookCategories"
           item-text="title"
           item-value="name"
           :items="autoCompleteData.bookCategories"
-          v-model="filters.bookCategory"
+          v-model="filters.book_category"
           @change="searchFilterChanged"
           @update:search-input="
             autoCompleteChanged('searchCategories', 'bookCategories', $event)
           "
         ></v-autocomplete>
       </v-col>
+      <!-- Author -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
         <v-autocomplete
           dense
           label="Author"
           placeholder="Author"
           outlined
+          clearable
           color="#D22D43"
           :loading="loading.authors"
           item-text="title"
@@ -78,12 +82,14 @@
           "
         ></v-autocomplete>
       </v-col>
+      <!-- Publisher -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
         <v-autocomplete
           dense
           label="Publisher"
           placeholder="Publisher"
           outlined
+          clearable
           color="#D22D43"
           :loading="loading.publishers"
           item-text="title"
@@ -96,17 +102,19 @@
           "
         ></v-autocomplete>
       </v-col>
+      <!-- Book Series -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
         <v-autocomplete
           dense
           label="Series"
           placeholder="Series"
           outlined
+          clearable
           color="#D22D43"
           :loading="loading.bookSeries"
           item-text="title"
           item-value="name"
-          v-model="filters.bookSeries"
+          v-model="filters.book_series"
           :items="autoCompleteData.bookSeries"
           @change="searchFilterChanged"
           @update:search-input="
@@ -114,16 +122,17 @@
           "
         ></v-autocomplete>
       </v-col>
+      <!-- Age Group -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
         <v-autocomplete
           dense
-          label="Age group"
+          label="Age Group"
           outlined
+          clearable
           color="#D22D43"
           :loading="loading.ageGroups"
           item-text="title"
           item-value="name"
-          v-model="filters.ageGroups"
           :items="autoCompleteData.ageGroups"
           @change="searchFilterChanged"
           @update:search-input="
@@ -172,7 +181,12 @@
 
 <script lang="ts">
 import { Component, Action, Vue } from 'nuxt-property-decorator'
-import { CursorPaginator, GQLResponse } from '~/plugins/frappeclient'
+import {
+  CursorPaginator,
+  DBFilterInput,
+  DBFilterOperator,
+  GQLResponse,
+} from '~/plugins/frappeclient'
 import {
   AgeGroup,
   Author,
@@ -195,11 +209,11 @@ export class BooksPage extends Vue {
     bookSeries: false,
     ageGroups: false,
   }
-  autoCompleteData: {[x: string]: BaseNode[] } = {}
-  filters = {}
+  autoCompleteData: { [x: string]: BaseNode[] } = {}
+  filters: { [x: string]: string } = {}
   books: BookNode[] = []
   lastBookLoaded: string = ''
-  timeOuts: { [x: string]: NodeJS.Timeout | null } = { }
+  timeOuts: { [x: string]: NodeJS.Timeout | null } = {}
   showAdvancedFilters = false
 
   @Action('books/searchBooks')
@@ -237,10 +251,28 @@ export class BooksPage extends Vue {
     }
     this.loading.books = true
     // console.info('Loading books after', this.lastBookLoaded)
+    const _filters: DBFilterInput[] = [
+      // { fieldname: 'title_image', operator: DBFilterOperator.NEQ, value: '' },
+    ]
+    for (const f in this.filters) {
+      if (!this.filters[f]) {
+        continue
+      }
+      const _filter = {
+        fieldname: f,
+        operator: DBFilterOperator.EQ,
+        value: this.filters[f],
+      }
+      if (f === 'title') {
+        _filter.operator = DBFilterOperator.LIKE
+        _filter.value = `%${this.filters[f]}%`
+      }
+      _filters.push(_filter)
+    }
     const bookCursor = await this.searchBooks({
       first: 12,
       after: this.lastBookLoaded,
-      filter: [{ fieldname: 'title_image', operator: 'NEQ', value: '' }],
+      filter: _filters,
     })
     this.lastBookLoaded = bookCursor.pageInfo.endCursor
     // console.info('Loaded till', this.lastBookLoaded)
@@ -254,17 +286,13 @@ export class BooksPage extends Vue {
       clearTimeout(this.timeOuts.books)
     }
     this.timeOuts.books = setTimeout(() => {
-      console.log(this.filters)
-      // this.lastBookLoaded = '';
-      // this.loadMoreBooks();
+      this.lastBookLoaded = ''
+      this.books = []
+      this.loadMoreBooks()
     }, 1000)
   }
 
-  autoCompleteChanged(
-    searchMethod: string,
-    typeName: any,
-    $event: string
-  ) {
+  autoCompleteChanged(searchMethod: string, typeName: any, $event: string) {
     if (!process.client) {
       return
     }
@@ -272,7 +300,7 @@ export class BooksPage extends Vue {
       if (this.autoCompleteData[typeName]?.length > 0) {
         clearTimeout(this.timeOuts[typeName]!)
       } else {
-        return;
+        return
       }
     }
 
@@ -281,8 +309,8 @@ export class BooksPage extends Vue {
       // @ts-ignore
       this.autoCompleteData[typeName] = await this[searchMethod]($event)
       this.loading[typeName] = false
-      this.timeOuts[typeName] = null;
-    }, 750);
+      this.timeOuts[typeName] = null
+    }, 750)
   }
 }
 

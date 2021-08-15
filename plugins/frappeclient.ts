@@ -15,9 +15,20 @@ export interface CursorPaginator<T> {
   }[]
 }
 
+export enum DBFilterOperator {
+  EQ = 'EQ',
+  NEQ = 'NEQ',
+  LT = 'LT',
+  GT = 'GT',
+  LTE = 'LTE',
+  GTE = 'GTE',
+  LIKE = 'LIKE',
+  NOT_LIKE = 'NOT_LIKE',
+}
+
 export interface DBFilterInput {
   fieldname: string
-  operator: 'EQ' | 'NEQ' | 'LT' | 'GT' | 'LTE' | 'GTE' | 'LIKE' | 'NOT_LIKE'
+  operator: DBFilterOperator
   value: any
 }
 
