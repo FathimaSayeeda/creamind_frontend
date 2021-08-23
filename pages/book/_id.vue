@@ -26,47 +26,58 @@
         ><div class="book-title">{{ book.name }}</div>
         <div class="subtitle">{{ book.subtitle }}</div>
 
-        <v-row class="mt-md-5 details justify-start"
-          ><v-col cols="3"
-            ><div>Series</div>
-            <div>Author</div>
-            <div>Publisher</div>
-            <div>Categories</div>
-            <div>Age group</div></v-col
-          ><v-col cols="1"
-            ><div>-</div>
-            <div>-</div>
-            <div>-</div>
-            <div>-</div>
-            <div>-</div></v-col
-          ><v-col
-            ><div>{{ book.series }}</div>
-            <div>{{ (book.author || {}).title }}</div>
-            <div>{{ (book.publisher || {}).title }}</div>
-            <div>{{ book.categories }}</div>
-            <div>{{ book.agegroups }}</div></v-col
-          ></v-row
-        >
-        <!-- <div class="mt-md-5 subtitle">Book Description</div> -->
-        <v-row class="mt-md-5 details justify-start"
-          ><v-col cols="3"
-            ><div>Type</div>
-            <div>No. of pages</div>
-            <div>Retail Price</div> </v-col
-          ><v-col cols="1"
-            ><div>-</div>
-            <div>-</div>
-            <div>-</div> </v-col
-          ><v-col
-            ><div>{{ book.type }}</div>
-            <div>{{ book.pages }}</div>
-            <div>{{ book.price }}</div>
-          </v-col></v-row
-        >
+        <div class="mt-md-5 details">
+          <!-- Author -->
+          <v-row v-if="book.author">
+            <v-col cols="3">Author</v-col>
+            <v-col cols="1">-</v-col>
+            <v-col cols="8">{{ book.author.title }}</v-col>
+          </v-row>
+          <!-- Publisher -->
+          <v-row v-if="book.publisher">
+            <v-col cols="3">Publisher</v-col>
+            <v-col cols="1">-</v-col>
+            <v-col cols="8">{{ book.publisher.title }}</v-col>
+          </v-row>
+          <!-- Book Series -->
+          <v-row v-if="book.book_series">
+            <v-col cols="3">Book Series</v-col>
+            <v-col cols="1">-</v-col>
+            <v-col cols="8">{{ book.book_series.title }}</v-col>
+          </v-row>
+          <!-- Categories -->
+          <v-row class="mt-3" v-if="book.categories">
+            <v-col>
+              Categories
+              <v-chip-group column>
+                <v-chip v-for="(g, i) in book.categories" :key="i">
+                  {{ g.book_category.title }}
+                </v-chip>
+              </v-chip-group>
+            </v-col>
+          </v-row>
+          <!-- Age Groups -->
+          <v-row class="mt-3" v-if="book.age_groups">
+            <v-col>
+            AGE GROUPS
+            <v-chip-group column>
+              <v-chip :ripple="false" v-for="(g, i) in book.age_groups" :key="i">
+                {{ g.age_group.title }}
+              </v-chip>
+            </v-chip-group>
+            </v-col>
+          </v-row>
+          <v-row
+            v-if="book.description"
+            class="mt-5"
+            style="white-space: pre-wrap; line-height: 1.2em"
+            ><v-col>{{ book.description }}</v-col></v-row
+          >
+        </div>
         <!-- <v-btn outlined color="#099094" class="mt-10 pa-5"
           >Rent the book now!</v-btn
         > -->
-        <div class="main_button mt-5 mt-lg-8">RENT THE BOOK NOW.</div>
+        <!-- <div class="main_button mt-5 mt-lg-8">RENT THE BOOK NOW.</div> -->
       </v-col></v-row
     ><v-img
       class="hidden-sm-and-down pennants"
@@ -88,7 +99,7 @@ import { BookNode } from '~/store/types'
 export class BookPage extends Vue {
   book: BookNode = {
     author: {},
-    publisher: {}
+    publisher: {},
   } as BookNode
   bookLoaded = false
 
@@ -99,7 +110,7 @@ export class BookPage extends Vue {
   getBook!: (slug: string) => Promise<BookNode | null>
 
   async fetch() {
-    this.bookLoaded = false;
+    this.bookLoaded = false
     const slug = this.$route.params.id
     // console.info('Loading Book', slug)
     const book = await this.getBook(slug)
@@ -107,8 +118,8 @@ export class BookPage extends Vue {
       // redirect 404
       return
     }
-    this.book = book;
-    this.bookLoaded = true;
+    this.book = book
+    this.bookLoaded = true
   }
 }
 
@@ -129,7 +140,11 @@ export default BookPage
 .details {
   font-family: 'Nexa-Bold';
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1;
+
+  .row {
+    margin-top: 0.1em;
+  }
 }
 .main_button {
   border: 3px solid #099094;
