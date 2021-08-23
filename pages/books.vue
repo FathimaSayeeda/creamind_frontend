@@ -150,7 +150,6 @@
           <v-col v-for="book in books" :key="book.slug" cols="6" sm="6" md="3">
             <BookTile :book="book"></BookTile>
           </v-col>
-          <v-spacer v-intersect.quiet="pageScrollBottom"></v-spacer>
           <!-- <v-progress-linear
             v-if="loading.books"
             class="my-2"
@@ -159,6 +158,7 @@
         </v-row>
       </div>
     </v-responsive>
+    <v-spacer v-intersect.quiet="pageScrollBottom"></v-spacer>
   </div>
 </template>
 
