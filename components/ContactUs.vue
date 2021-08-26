@@ -7,7 +7,7 @@
           Contact Us
         </h1>
         <v-row no-gutters class="justify-center">
-          <v-col cols="5">
+          <v-col cols="12" sm="6" md="5">
             <googlemaps-map
               class="map"
               :options="map_options"
@@ -19,18 +19,23 @@
                 :position="thecreamind_loc"
               /> </googlemaps-map
           ></v-col>
-          <v-col class="address mx-10" cols="3"
-            ><div class="address-title mb-5">ADDRESS</div>
-            <div>The Crea Mind</div>
-            <div>Thaazhe Angadi Road</div>
-            <div>Near Jyothi Hospital</div>
-            <div>Mananathawady</div>
-            <div>Wayanad district</div>
-            <div>Kerala, India</div>
-            <div>Pin: 670645</div>
-            <div class="mob my-6">Call us at: +91 90744 17193</div></v-col
-          ><v-col
-            ><v-row
+          <v-col class="address mx-10" cols="12" sm="6" md="3"
+            ><div class="ml-5 ml-md-0 address-title mb-5 mt-8 mt-md-auto">
+              ADDRESS
+            </div>
+            <div class="address-content mx-7 mx-md-0">
+              <div>The Crea Mind</div>
+              <div>Thaazhe Angadi Road</div>
+              <div>Near Jyothi Hospital</div>
+              <div>Mananathawady</div>
+              <div>Wayanad district</div>
+              <div>Kerala, India</div>
+              <div>Pin: 670645</div>
+              <div class="mob my-6">Call us at: +91 99469 94895</div>
+              <div class="mob my-6 ml-16 pl-13">‎+91 99465 40457</div>
+            </div></v-col
+          ><v-col cols="12" md="4"
+            ><v-row justify="center" class="my-5"
               ><a href="https://wa.me/+919074417193/" target="_blank"
                 ><img
                   class="social-media-links mx-3"
@@ -336,7 +341,7 @@ export default Vue.extend({
   letter-spacing: 2px;
 }
 .mob {
-  font-size: 20px;
+  font-size: 18px;
   font-family: 'Nexa-Bold';
   color: #099094;
   letter-spacing: 2px;
