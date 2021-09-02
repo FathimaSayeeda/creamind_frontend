@@ -57,10 +57,11 @@
           :items="autoCompleteData.bookCategories"
           v-model="filters.book_category"
           @change="searchFilterChanged"
-          @update:search-input="
+          ><!--
+                    @update:search-input="
             autoCompleteChanged('searchCategories', 'bookCategories', $event)
           "
-        ></v-autocomplete>
+        --></v-autocomplete>
       </v-col>
       <!-- Author -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
@@ -77,10 +78,12 @@
           v-model="filters.author"
           :items="autoCompleteData.authors"
           @change="searchFilterChanged"
+          ><!-- 
           @update:search-input="
             autoCompleteChanged('searchAuthors', 'authors', $event)
           "
-        ></v-autocomplete>
+         --></v-autocomplete
+        >
       </v-col>
       <!-- Publisher -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
@@ -97,10 +100,12 @@
           v-model="filters.publisher"
           :items="autoCompleteData.publishers"
           @change="searchFilterChanged"
+          ><!--
           @update:search-input="
             autoCompleteChanged('searchPublishers', 'publishers', $event)
           "
-        ></v-autocomplete>
+          --></v-autocomplete
+        >
       </v-col>
       <!-- Book Series -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
@@ -117,10 +122,12 @@
           v-model="filters.book_series"
           :items="autoCompleteData.bookSeries"
           @change="searchFilterChanged"
+          ><!--
           @update:search-input="
             autoCompleteChanged('searchBookSeries', 'bookSeries', $event)
           "
-        ></v-autocomplete>
+          --></v-autocomplete
+        >
       </v-col>
       <!-- Age Group -->
       <v-col cols="12" md="2" class="my-n4 my-md-auto">
@@ -135,12 +142,15 @@
           item-value="name"
           :items="autoCompleteData.ageGroups"
           @change="searchFilterChanged"
+          ><!--
           @update:search-input="
             autoCompleteChanged('searchAgeGroups', 'ageGroups', $event)
           "
-        ></v-autocomplete> </v-col
-    ></v-row>
-    <v-responsive max-width="1300px" class="margined white--text mx-auto">
+          --></v-autocomplete
+        >
+      </v-col></v-row
+    >
+    <v-responsive max-width="1300px" class="margined white-text mx-auto">
       <div class="featured">
         <v-row no-gutters class="justify-center mx-md-16">
           <v-spacer class="hidden-sm-and-down"></v-spacer>
@@ -234,8 +244,37 @@ export class BooksPage extends Vue {
   @Action('ageGroups/searchAgeGroups')
   searchAgeGroups!: (txt?: string) => Promise<AgeGroup[]>
 
+  @Action('bookCategories/getAllCategories')
+  getAllCategories!: () => Promise<BookCategory[]>
+
+  @Action('authors/getAllAuthors')
+  getAllAuthors!: () => Promise<Author[]>
+
+  @Action('publishers/getAllPublishers')
+  getAllPublishers!: () => Promise<Publisher[]>
+
+  @Action('bookSeries/getAllBookSeries')
+  getAllBookSeries!: () => Promise<BookSeries[]>
+
+  @Action('ageGroups/getAllAgeGroups')
+  getAllAgeGroups!: () => Promise<AgeGroup[]>
+
   async fetch() {
-    await Promise.all([this.loadMoreBooks()])
+    const promises = [
+      this.loadMoreBooks(),
+      this.getAllCategories().then(
+        (r) => (this.autoCompleteData.bookCategories = r)
+      ),
+      this.getAllAuthors().then((r) => (this.autoCompleteData.authors = r)),
+      this.getAllPublishers().then(
+        (r) => (this.autoCompleteData.publishers = r)
+      ),
+      this.getAllBookSeries().then(
+        (r) => (this.autoCompleteData.bookSeries = r)
+      ),
+      this.getAllAgeGroups().then((r) => (this.autoCompleteData.ageGroups = r)),
+    ] as Promise<unknown>[]
+    await Promise.all(promises)
     do {
       await new Promise((r) => setTimeout(r, 1000))
     } while (Object.values(this.loading).some((x) => x))
