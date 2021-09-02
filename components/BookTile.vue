@@ -6,11 +6,7 @@
       max-height="320px"
       class="featured-card mx-2 mx-sm-5 my-5"
     >
-      <v-img
-        :src="$frappe.getUrl(book.title_image)"
-        class="book-image"
-        height="200px"
-      ></v-img>
+      <v-img :src="imgUrl" class="book-image" height="200px"></v-img>
 
       <marquee width="80%" height="50%" class="ml-5"
         ><v-card-title class="card-title">
@@ -43,6 +39,12 @@ export default Vue.extend({
         (this.book.publisher && this.book.publisher.title) ||
         ''
       )
+    },
+    imgUrl: function () {
+      if (!this.book || !this.book.title_image) {
+        return require('~/assets/cover-not-available.jpg')
+      }
+      return this.$frappe.getUrl(this.book.title_image)
     },
   },
 })
