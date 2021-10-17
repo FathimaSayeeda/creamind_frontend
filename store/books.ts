@@ -103,10 +103,10 @@ export default class BooksStore extends VuexModule {
     }
   ): Promise<CursorPaginator<BookNode>> {
     return $frappe
-      .graphql<{ Books: CursorPaginator<BookNode> }>(
+      .graphql<{ searchBooks: CursorPaginator<BookNode> }>(
         `
     query BooksQuery($first: Int, $last: Int, $after: String, $before: String, $filter: [DBFilterInput!], $sortBy: BookSortingInput) {
-      Books(
+      searchBooks(
         first: $first, last: $last,
         after: $after, before: $before,
         filter: $filter, sortBy: $sortBy
@@ -137,6 +137,6 @@ export default class BooksStore extends VuexModule {
     `,
         args
       )
-      .then((r) => r.data.Books)
+      .then((r) => r.data.searchBooks)
   }
 }

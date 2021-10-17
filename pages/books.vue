@@ -141,6 +141,7 @@
           item-text="title"
           item-value="name"
           :items="autoCompleteData.ageGroups"
+          v-model="filters.age_group"
           @change="searchFilterChanged"
           ><!--
           @update:search-input="
@@ -222,8 +223,10 @@ export class BooksPage extends Vue {
   autoCompleteData: { [x: string]: BaseNode[] } = {}
   filters: { [x: string]: string } = {}
   books: BookNode[] = []
+  hasNextPage = true;
   lastBookLoaded: string = ''
   timeOuts: { [x: string]: NodeJS.Timeout | null } = {}
+  disableLoadingOnScroll = false
   showAdvancedFilters = false
 
   @Action('books/searchBooks')
@@ -280,12 +283,25 @@ export class BooksPage extends Vue {
     } while (Object.values(this.loading).some((x) => x))
   }
 
+  disableScrollLoader() {
+    if (this.timeOuts.disableScrollLoader) {
+      clearTimeout(this.timeOuts.disableScrollLoader)
+    }
+    this.disableLoadingOnScroll = true
+    this.timeOuts.disableScrollLoader = setTimeout(() => {
+      this.disableLoadingOnScroll = false
+    }, 500);
+  }
+
   pageScrollBottom() {
+    if (this.disableLoadingOnScroll) {
+      return
+    }
     this.loadMoreBooks()
   }
 
   async loadMoreBooks() {
-    if (this.loading.books) {
+    if (this.loading.books || !this.hasNextPage) {
       return
     }
     this.loading.books = true
@@ -313,6 +329,8 @@ export class BooksPage extends Vue {
       after: this.lastBookLoaded,
       filter: _filters,
     })
+    this.disableScrollLoader();
+    this.hasNextPage = bookCursor.pageInfo.hasNextPage;
     this.lastBookLoaded = bookCursor.pageInfo.endCursor
     // console.info('Loaded till', this.lastBookLoaded)
 
@@ -321,13 +339,15 @@ export class BooksPage extends Vue {
   }
 
   async searchFilterChanged(txt: string) {
-    if (this.timeOuts.books) {
-      clearTimeout(this.timeOuts.books)
+    if (this.timeOuts.searchFilterChanged) {
+      clearTimeout(this.timeOuts.searchFilterChanged)
     }
-    this.timeOuts.books = setTimeout(() => {
+    this.timeOuts.searchFilterChanged = setTimeout(() => {
+      this.hasNextPage = true;
       this.lastBookLoaded = ''
       this.books = []
       this.loadMoreBooks()
+      this.disableScrollLoader()
     }, 1000)
   }
 
