@@ -13,8 +13,9 @@
           <v-col cols="12" sm="6" class="pr-1">
             <v-text-field
               filled
+              ref="firstName"
               outlined
-              required
+              :rules="[rules.required]"
               color="#099094"
               class="text-field my-n2 rounded-lg"
               label="First Name"
@@ -47,7 +48,7 @@
               label="Date of Birth"
               prepend-icon="mdi-calendar"
               readonly
-              required
+              :rules="[rules.required]"
               v-bind="attrs"
               v-on="on"
             ></v-text-field>
@@ -69,7 +70,7 @@
 
         <!-- Gender -->
         <v-radio-group
-          required
+          :rules="[rules.required]"
           v-model="registration_doc.gender"
           row
           class="mt-n3"
@@ -111,7 +112,7 @@
           v-model="registration_doc.permanent_address"
           filled
           outlined
-          required
+          :rules="[rules.required]"
           color="#099094"
           class="text-field my-n2 rounded-lg"
           label="Permanent Address"
@@ -125,6 +126,11 @@
           v-if="!registration_doc.delivery_address_same_as_permanent_address"
           v-model="registration_doc.delivery_address"
           filled
+          :rules="
+            registration_doc.delivery_address_same_as_permanent_address
+              ? []
+              : [rules.required]
+          "
           outlined
           color="#099094"
           class="text-field my-n2 rounded-lg"
@@ -139,7 +145,7 @@
             <v-text-field
               v-model="registration_doc.mother_full_name"
               filled
-              required
+              :rules="[rules.required]"
               outlined
               color="#099094"
               class="text-field my-n2 rounded-lg"
@@ -157,7 +163,7 @@
               v-model="registration_doc.mother_mobile_no"
               filled
               outlined
-              required
+              :rules="[rules.required]"
               color="#099094"
               class="text-field my-n2 rounded-lg"
               label="Mobile Number"
@@ -179,7 +185,7 @@
               v-model="registration_doc.father_full_name"
               filled
               outlined
-              required
+              :rules="[rules.required]"
               color="#099094"
               class="text-field my-n2 rounded-lg"
               label="Full Name"
@@ -196,7 +202,7 @@
               v-model="registration_doc.father_mobile_no"
               filled
               outlined
-              required
+              :rules="[rules.required]"
               color="#099094"
               class="text-field my-n2 rounded-lg"
               label="Mobile Number"
@@ -215,10 +221,9 @@
         <!-- Num Books -->
         <v-text-field
           v-model="registration_doc.no_of_books_at_a_time"
-          :rules="[rules.integer]"
+          :rules="[rules.integer, rules.required]"
           type="number"
           filled
-          required
           outlined
           color="#099094"
           class="text-field my-n2 rounded-lg"
@@ -316,6 +321,7 @@ export default Vue.extend({
       submit_registration: false,
     },
     rules: {
+      required: (v: any) => !!v || 'This is a required field',
       integer: (value: any) => {
         try {
           if (typeof value === 'string' && value.indexOf('.') >= 0) {
@@ -338,6 +344,16 @@ export default Vue.extend({
     async make_request() {
       this.loading.submit_registration = true
       // @ts-ignore
+      this.$refs.form.validate()
+      await new Promise((r) => setTimeout(r, 500))
+      console.log('VALIDATED', this.registration_form_valid)
+      if (!this.registration_form_valid) {
+        // @ts-ignore
+        window.scrollTo(0, 0)
+        this.loading.submit_registration = false
+        return
+      }
+      // @ts-ignore
       const d = await this['registration/makeRegistrationRequest'](
         this.registration_doc
       )
@@ -346,10 +362,10 @@ export default Vue.extend({
       }))
       this.loading.submit_registration = false
       if (d.errors && d.errors.length) {
-        this.modal.registration_failed = true;
+        this.modal.registration_failed = true
       } else {
         // Success
-        this.modal.registration_successful = true;
+        this.modal.registration_successful = true
       }
     },
   },
